@@ -33,20 +33,20 @@ maybe needs to last more rounds. Acutally what I like better, make all their rol
 1,31,One for One,Enemy,1 Round,Attack,Weapon,If the next attack against you deals damage you may attack in response. If it does not deal damage then return a card from discard to your hand.,Discard,,,,Now I'm Your Problem,Enemy,1 Round,Attack,Weapon,If the next attack against from the Target deals no damage then the Target becomes Toppled.,Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,32,Hunter's Reward,Enemy,Instant,Attack    Reduce your Attack Value by X,Weapon,If your attack deals damage then you may remove a Mark from the Target. If you removed a Mark then heal for X and deal an additional X damage to the Target.,Exhaust,,,,Enemy Spotted,Enemy,Instant,,Influence,Mark Target,Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,33,Self Preservation,Enemy,1 Round,X is your Level,Influence,Add X to each of your Defense Values. Reduce each of your Attack Values by X.,Hand,,,,Aggressive,Enemy,Instant,Attack,Weapon,Add X to the Attack Value and lose X life.,Hand,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
-1,34,Changing Fate,Any,1 Round,,Influence,"You may force the Target to reroll a die in their next Influence, Attack, or Defense Roll.",Hand,,,,Destiny Swap,Any,1 Round,,Influence,"Choose either:
-1) The Targets lowest die value in their next Influence, Attack, or Defense Roll is treated as the max value for that die
-2) The Targets highest die value in their next Influence, Attack, or Defense Roll is treated as the minimum value for that die",Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
+1,34,Changing Fate,Any,1 Round,,Influence,"You may force the Target to reroll a die in their next Influence, Attack, or Defense Roll.",Hand,,,,Destiny Swap,Any,1 Round,,Influence,"Choose either the Targets:
+1) lowest die value in their next roll is treated as the max value for that die
+2) highest die value in their next roll is treated as the minimum value for that die",Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,35,Teetotaler,Enemy,1 Round,Influence,Influence,On success the Target's next value roll is rolled twice and the lower value must be used.,Discard,,,,Self Engineered,Self,Instant,,-,"Create a consumable: 
 1) A bomb that can be thrown up to 25 feet and deals 5 Damage in a 5 by 5 foot space. 
 2) A potion that heals for 3. 
-3) A trap that can only be seen while being deployed, is 5 x 10 feet, and ends the movement action of whatever triggers it.
+3) An invisible trap that is 5 x 10 feet and ends the movement action of whatever triggers it.
 It lasts until used or until the next day.",Exhaust,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,36,Sprint,Self,Instant,,-,Gain  30 feet of movement,Hand,,,,Jump Pad,Area,1 Round,X is your Level,Influence,Select a direction. Select a space within 5 feet of you. While active anyone on that space may use an action to jump (X * 5) feet in the selected direction,Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,37,Reposition,Enemy,Instant,Attack,Weapon,After your Attack you may move 5 feet. A attack cannot target you for this movement.,Discard,,,,Coward's Ultimatum,Enemies,X Rounds,X is your Level,Influence,You may make one Overstep Attack after each of your turns.,Exhaust,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
-1,38,Nature's Insight,Summon,Instant,Roll Influence for X    Y is your Level,Influence,"If X is:
-* greater than 2 then heal the summon up to Y health
-* greater than 5 then the summon may make an attack if able
-* greater than 8 then the summon may make another attack if able
+1,38,Nature's Insight,Summon,Instant,Roll Influence for X    Y is your Level,Influence,"If X is greater than:
+* 2 then heal the summon up to Y health
+* 5 then the summon may make an attack if able
+* 8 then the summon may make another attack if able
 * greater than 11 then the summons range is doubled for this action",Discard,,,,A Friend,Self,Instant,X is your Level,-,"Summon a companion. It has X health, an Attack Value of X, a Defense Value of X, and an Influence Value of X. It lasts until the next day.",Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,39,Land of Barbs,Area,X Rounds,X is your Level    Y is your Influence Roll,Influence,Choose (X + Y) 5 foot by 5 foot areas. Any movement that moves through or ends on one of those squares results in X damage.,Exhaust,,,,Fibrous Hold,Enemy,1 Round,Influence,Influence,On success the Target's movement cannot exceed 0. The Target may spend an action to remove this effect.,Discard,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
 1,40,Precision,Enemy,Instant,Attack    X is your Level,Weapon,If one of the die used for your Attack Value is less than X you may reroll that die.,Discard,,,,Beaten Bash,Enemy,Instant,Attack    X is your Level,Weapon,Lose X life and add X to your Attack Value.,Hand,2 Level Points,N/A,0,0,0,0,0,0,0,0,,,,
