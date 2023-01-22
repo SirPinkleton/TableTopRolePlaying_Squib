@@ -1,25 +1,45 @@
 ---
-sheet_width: 8.5in
-sheet_height: 11in
-card_width: 2.5in
-card_height: 3.5in
-position_reference: :center
+#emulating the 8.5in X 11in sheet size, but in the same units as everything else (mm)
+sheet_width: 216mm
+sheet_height: 280mm
+#46.7mm, aka 550px
+card_width: 46.7mm
+card_height: 46.7mm
+#using default position_reference, which is :topleft
+#apply a 15mm gap between edge of paper and card, otherwise offsets are the size of the cards cumulative
 cards:
-- x: 1.75in
-  y: 2.000in
-- x: 4.250in
-  y: 2.000in
-- x: 6.750in
-  y: 2.000in
-- x: 1.75in
-  y: 5.500in
-- x: 4.250in
-  y: 5.500in
-- x: 6.750in
-  y: 5.500in
-- x: 1.75in
-  y: 9.000in
-- x: 4.250in
-  y: 9.000in
-- x: 6.750in
-  y: 9.000in
+- x: 15mm #row 1, card 1
+  y: 15mm
+- x: 61.7mm #row 1, card 2 (right of card 1)
+  y: 15mm
+- x: 108.4mm #row 1, card 3 (right of card 2)
+  y: 15mm
+- x: 155.1mm #row 1, card 4 (right of card 3)
+  y: 15mm
+  
+- x: 15mm #row 2, card 5 (below card 1)
+  y: 61.7mm
+- x: 61.7mm #row 2, card 6 (right of card 5, below card 2)
+  y: 61.7mm
+- x: 108.4mm #row 2, card 7 (right of card 6, below card 3)
+  y: 61.7mm
+- x: 155.1mm #row 2, card 8 (right of card 7, below card 4)
+  y: 61.7mm
+  
+- x: 15mm #row 3, card 9 (below card 5)
+  y: 108.4mm
+- x: 61.7mm #row 3, card 10 (right of card 9, below card 6)
+  y: 108.4mm
+- x: 108.4mm #row 3, card 11 (right of card 10, below card 7)
+  y: 108.4mm
+- x: 155.1mm #row 3, card 12 (right of card 11, below card 8)
+  y: 108.4mm
+  
+- x: 15mm #row 4, card 13 (below card 9)
+  y: 155.1mm
+- x: 61.7mm #row 4, card 14 (right of card 13, below card 10)
+  y: 155.1mm
+- x: 108.4mm #row 4, card 15 (right of card 14, below card 11)
+  y: 155.1mm
+- x: 155.1mm #row 4, card 16 (right of card 15, below card 12)
+  y: 155.1mm
