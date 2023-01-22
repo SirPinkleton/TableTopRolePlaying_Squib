@@ -59,7 +59,7 @@ safe:
    - widthSafeArea
    - heightSafeArea
   radius: 8
-  fill_color: :weldon_blue
+  fill_color: :baby_blue_eyes
   stroke_width: 10
   #fill_color: '#eee'
 
@@ -111,7 +111,7 @@ ArmorAbility:
 
 backOfCards:
   extends: safe
-  fill_color: :bluebonnet
+  fill_color: :violet_blue
 
 #x = total width (530) - buffers on both side (85*2=170) = 360
 emblemBack:
