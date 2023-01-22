@@ -11,7 +11,7 @@ end
 #using gem game_icons to be able to load them
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
-Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 550, height: 550, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
 
   ## overall card stuff
 
