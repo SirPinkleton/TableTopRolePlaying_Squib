@@ -179,20 +179,30 @@ RequirementsValue2:
   x: += 50
 
 #width - 20*2 buffer on either side
-NotesTitle:
-  extends: 
+NotesBar:
+  extends:
    - RangeTitle
    - heightSafeArea
    - widthSafeArea
-  y: += 60
+  y: += 70
   align: center
   width: -= 40
-  height: 50
+  height: 1
+  
+# NotesTitle:
+  # extends: 
+   # - RangeTitle
+   # - heightSafeArea
+   # - widthSafeArea
+  # y: += 60
+  # align: center
+  # width: -= 40
+  # height: 50
   
 #height = total height (430) - height used up for attack/defense and buffer (60) - height used up for range/requirements (60) - height of notes title and buffer (70) -20? = 220
 NotesValue:
-  extends: NotesTitle
-  y: += 60
+  extends: NotesBar
+  y: += 20
   height: 185
   
 
