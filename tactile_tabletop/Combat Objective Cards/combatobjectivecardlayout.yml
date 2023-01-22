@@ -111,7 +111,7 @@ reward:
   extends: rules
   height: 50
   width: 40
-  x: += 810
+  x: += 740
   y: += 430
   font: 'Garamond 11'
 
@@ -120,7 +120,86 @@ rewardHeader:
   x: -= 180
   width: 200
 
+### card flair ###
+# black corner lines, maed out of triangles
+  
+topLeftTriangleFirst:
+  x1: 30
+  y1: 120
+  x2: 120
+  y2: 30
+  x3: 160
+  y3: 30
+  fill_color: black
+  
+topLeftTriangleSecond:
+  x1: 30
+  y1: 120
+  x2: 30
+  y2: 160
+  x3: 160
+  y3: 30
+  fill_color: black
+  
+#height is 750, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
+#750 - 30 - 120 = inner bottom of one line = 600?
+bottomLeftTriangleFirst:
+  x1: 30
+  y1: 630
+  x2: 30
+  y2: 590
+  x3: 120
+  y3: 720
+  fill_color: black
+  
+bottomLeftTriangleSecond:
+  x1: 30
+  y1: 590
+  x2: 120
+  y2: 720
+  x3: 160
+  y3: 720
+  fill_color: black
+  
+#width is 1050, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
+#1050 - 30 - 120 - 10 (?) = inner top of one line = 910
+topRightTriangleFirst:
+  x1: 920
+  y1: 30
+  x2: 880
+  y2: 30
+  x3: 1020
+  y3: 160
+  fill_color: black
+  
+topRightTriangleSecond:
+  x1: 920
+  y1: 30
+  x2: 1020
+  y2: 160
+  x3: 1020
+  y3: 120
+  fill_color: black
 
+bottomRightTriangleFirst:
+  x1: 920
+  y1: 720
+  x2: 880
+  y2: 720
+  x3: 1020
+  y3: 590
+  fill_color: black
+  
+bottomRightTriangleSecond:
+  x1: 920
+  y1: 720
+  x2: 1020
+  y2: 590
+  x3: 1020
+  y3: 630
+  fill_color: black
+  
+  
 ## back of card
 
 
