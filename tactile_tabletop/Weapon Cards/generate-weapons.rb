@@ -50,7 +50,7 @@ Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Weapon Name'].si
 
   save_png prefix: 'ttwc_'
   #save_pdf trim: 37.5
-  save_sheet prefix: 'ttwc-print_', columns: 3, rows: 5, margin: 0, gap: 5, trim: 35
+  save_sheet prefix: 'weapon_sprue_', sprue: 'letter_poker_card_custom.yml'
 
 end
 
@@ -66,5 +66,5 @@ Squib::Deck.new(dpi: 300, width: 820, height: 820, cards: data['Weapon Name'].si
 
   #save_png prefix: 'ttwc_BACK'
   #save_pdf trim: 37.5
-  save_sheet prefix: 'ttwc-print_BACK', columns: 3, rows: 5, margin: 0, gap: 5, trim: 35
+  save_sheet prefix: 'weapon_back_sprue_', sprue: 'letter_poker_card_custom.yml'
 end
