@@ -23,6 +23,7 @@ Squib::Deck.new(dpi: 300, width: '45mm', height: '45mm', cards: data['Armor Name
   ## top ability stuff
   #rect layout: 'ArmorTitle'
   text str: data['Armor Name'], layout: 'ArmorTitle'
+  rect layout: 'titleUnderbar'
   #rect layout: 'ArmorAbility'
   text str: data['Set Ability 1'], layout: 'ArmorAbility'
 
