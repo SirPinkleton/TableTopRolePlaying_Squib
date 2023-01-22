@@ -43,8 +43,8 @@ Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon
   svg file: data['Requirement1'].map {|t| "#{t.downcase}.svg" }, layout: 'RequirementsValue1'
   svg file: data['Requirement2'].map {|t| "#{t.downcase}.svg" }, layout: 'RequirementsValue2'
   
-  text str: "Notes:", layout: 'NotesTitle'
-  #rect layout: 'NotesTitle'
+  #text str: "Notes:", layout: 'NotesTitle'
+  rect layout: 'NotesBar'
   text str: data['Extra Notes'], layout: 'NotesValue'
   #rect layout: 'NotesValue'
 
