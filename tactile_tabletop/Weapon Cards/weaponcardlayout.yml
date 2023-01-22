@@ -91,7 +91,7 @@ fromTopLeftSafeToMargin:
 ThickerCorners:
   extends: safe
   radius: 120
-  fill_color: :cyclamen
+  fill_color: :pink_sherbet
   
 ### Text Specification ###
 # Need to specify the font size, x co-ords, width, height, and alignment of all the text
