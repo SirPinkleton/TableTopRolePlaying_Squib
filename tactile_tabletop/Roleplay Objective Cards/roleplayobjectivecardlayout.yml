@@ -61,7 +61,7 @@ safe:
    - heightSafeArea
   radius: 8
   #dash: 3 3
-  fill_color: :tuscan
+  fill_color: :deep_peach
   
 # adding 20 pixel buffer from safe area line for clean look
 
@@ -213,7 +213,7 @@ bottomRightTriangleSecond:
 
 backOfCards:
   extends: safe
-  fill_color: :french_bistre
+  fill_color: :saddle_brown
 
 diceBack:
   x: 430
