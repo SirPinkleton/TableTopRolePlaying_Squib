@@ -144,7 +144,7 @@ RangeTitle:
 #x = width of range tutle (100), buffer handled with width and center alignment, as long as both add up to 160
 RangeValue:
   extends: RangeTitle
-  x: += 100
+  x: += 80
   width: 100
   align: center
   
