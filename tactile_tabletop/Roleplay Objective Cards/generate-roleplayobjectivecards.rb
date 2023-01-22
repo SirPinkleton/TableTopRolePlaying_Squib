@@ -13,7 +13,7 @@ end
 
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
-Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'objectivecardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'roleplayobjectivecardlayout.yml')  do
 
   ## overall card stuff
 
@@ -28,6 +28,14 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
   #rect layout: 'reward'
   text str: "Reward: ", layout: 'rewardHeader'
   text str: data['Reward'], layout: 'reward'
+  triangle layout: 'topLeftTriangleFirst'
+  triangle layout: 'topLeftTriangleSecond'
+  triangle layout: 'bottomLeftTriangleFirst'
+  triangle layout: 'bottomLeftTriangleSecond'
+  triangle layout: 'topRightTriangleFirst'
+  triangle layout: 'topRightTriangleSecond'
+  triangle layout: 'bottomRightTriangleFirst'
+  triangle layout: 'bottomRightTriangleSecond'
   
   ## top ability stuff
   #rect layout: 'lineRightOfBubbles'
@@ -46,7 +54,7 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
   #save_pdf trim: 37.5
 end
 
-Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'objectivecardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'roleplayobjectivecardlayout.yml')  do
 
   ## overall card stuff
 
