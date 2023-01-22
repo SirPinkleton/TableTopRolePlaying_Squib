@@ -25,8 +25,8 @@ fromTopLeftBleedToCut:
 # The "cut area line", everything outside of this area guaranteed to be lost
 cut:
   extends: fromTopLeftBleedToCut
-  width: 530
-  height: 530
+  width: 550
+  height: 550
   radius: 16
   fill_color: '#555'
   
@@ -50,10 +50,10 @@ fromTopLeftCutToSafe:
 
 #total width (530) - 35 buffer on both sides (35*2=70) = 460
 widthSafeArea:
-  width: 460
+  width: 480
 
 heightSafeArea:
-  height: 460
+  height: 480
   
 safe:
   extends: 
@@ -70,13 +70,13 @@ safe:
 fromLeftSafeToMargin:
   extends: fromLeftCutToSafe
   x: += 20
-  width: 430
+  width: 450
   
 #470 - (20+20) = 430
 fromTopSafeToMargin:
   extends: fromTopCutToSafe
   y: += 20
-  height: 430
+  height: 450
 
 fromTopLeftSafeToMargin:
   extends:
@@ -182,7 +182,7 @@ NotesTitle:
 #height = total height (430) - height used up for attack/defense and buffer (60) - height used up for range/requirements (60) - height of notes title and buffer (70) -20? = 220
 NotesValue:
   extends: NotesTitle
-  y: += 40
+  y: += 60
   height: 185
   
 ## back of card
