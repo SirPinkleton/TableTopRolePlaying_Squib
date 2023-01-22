@@ -85,9 +85,9 @@ title:
   extends:
    - fromTopLeftSafeToMargin
    - widthSafeArea
-  height: 150
+  height: 100
   align: center
-  font: 'Garamond 14'
+  font: 'Garamond 18'
   color: :black
   align: center
   width: -= 40
@@ -100,49 +100,50 @@ lineUnderTitle:
   
 rules:
   extends: lineUnderTitle
-  height: 240
+  height: 400
   x: += 40
   width: -= 80
   y: += 50
-  font: 'Garamond 9'
+  font: 'Garamond 14'
+  valign: middle
   
 reward:
   extends: rules
-  height: 40
+  height: 50
   width: 40
-  x: += 510
-  y: += 280
+  x: += 810
+  y: += 430
   font: 'Garamond 11'
 
 rewardHeader:
   extends: reward
-  x: -= 200
+  x: -= 180
   width: 200
+
 
 ## back of card
 
 
 backOfCards:
   extends: safe
-  # fill_color: :raw_umber
-  fill_color: '#444'
+  fill_color: :french_bistre
 
 diceBack:
   x: 430
-  y: 420
+  y: 250
   width: 250
   height: 250
   angle: 2
 
 cardBack:
-  x: 550
-  y: 290
+  x: 750
+  y: 120
   width: 250
   height: 250
   angle: 120
   
 tokensBack:
-  x: 270
-  y: 500
+  x: 370
+  y: 370
   width: 250
   height: 250

@@ -41,24 +41,24 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
 
   ## output file stuff
 
-  save_png prefix: 'ttcc_'
+  save_png prefix: 'objective_'
   save_sheet prefix: 'objective_sprue_', sprue: 'letter_poker_card_objectives.yml'
   #save_pdf trim: 37.5
 end
 
-# Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'charactercardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'objectivecardlayout.yml')  do
 
-  # ## overall card stuff
+  ## overall card stuff
 
-  # background color: 'white'
-  # rect layout: 'cut'
-  # rect layout: 'backOfCards'
-  # svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
-  # svg data: GameIcons.get('card-random').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'cardBack'
-  # svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
-  # ## output file stuff
+  background color: 'white'
+  rect layout: 'cut'
+  rect layout: 'backOfCards'
+  svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
+  svg data: GameIcons.get('card-random').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'cardBack'
+  svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
+  ## output file stuff
 
-  # save_png prefix: 'ttcc_BACK'
-  # save_sheet prefix: 'objective_back_sprue_', sprue: 'letter_poker_card_armors.yml'
-  # #save_pdf trim: 37.5
-# end
+  save_png prefix: 'objective_back_'
+  save_sheet prefix: 'objective_back_sprue_', sprue: 'letter_poker_card_objectives.yml'
+  #save_pdf trim: 37.5
+end
