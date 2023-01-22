@@ -19,6 +19,7 @@ Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon
   background color: 'white'
   rect layout: 'cut'
   rect layout: 'safe'
+  rect layout: 'ThickerCorners'
   
   text str: data['Weapon Name'], layout: 'WeaponTitle'
   #rect layout: 'WeaponTitle'

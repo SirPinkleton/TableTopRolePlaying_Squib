@@ -62,7 +62,7 @@ safe:
    - widthSafeArea
   radius: 8
   #fill_color: '#eee'
-  fill_color: :cyclamen
+  fill_color: :black
 
 # adding 20 pixel buffer from safe area line for clean look
 
@@ -82,6 +82,15 @@ fromTopLeftSafeToMargin:
   extends:
    - fromLeftSafeToMargin
    - fromTopSafeToMargin
+   
+   
+### Additional flair ###
+# bars that cover the corners
+
+ThickerCorners:
+  extends: safe
+  radius: 100
+  fill_color: :cyclamen
   
 ### Text Specification ###
 # Need to specify the font size, x co-ords, width, height, and alignment of all the text
