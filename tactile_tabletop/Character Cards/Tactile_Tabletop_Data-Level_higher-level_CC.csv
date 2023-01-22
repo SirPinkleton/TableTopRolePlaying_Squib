@@ -1,36 +1,37 @@
-Top Ability Name,Top Ability Target,Top Ability Duration,Top Ability Die Roll/Scaler,Top Ability Rules,Top Ability Following Card Action,Bottom Ability Name,Bottom Ability Target,Bottom Ability Duration,Bottom Ability Die Roll/Scaler,Bottom Ability Rules,Bottom Ability Following Card Action,Passives,Requirements
-Truth Seeker,Enemy,Instant,X = Cards exhausted,Return X cards from discard and perform X of these abilities: 1: Learn Target Enemies actions 2: Learn Target Enemies Attack/Defense/Influence Die 3: Learn Target Enemies gear and health,Discard,Pause Thoughts,Enemy,1 Rnd,Influence,"On success exhaust a card. If you know their actions, decide how one action of their next turn will be played. NEEDS REVIEW",Discard,1 Skill Point,Needs Requirement
+Top Ability Name,Top Ability Target,Top Ability Duration,Top Ability Die Roll/Scaler,Top Ability Range,Top Ability Rules,Top Ability Following Card Action,Bottom Ability Name,Bottom Ability Target,Bottom Ability Duration,Bottom Ability Die Roll/Scaler,Bottom Ability Rules,Bottom Ability Following Card Action,Passives,Requirements
+Truth Seeker,Enemy,Instant,X = Cards exhausted,,Return X cards from discard and perform X of these abilities: 1: Learn Target Enemies actions 2: Learn Target Enemies Attack/Defense/Influence Die 3: Learn Target Enemies gear and health,Discard,Pause Thoughts,Enemy,1 Rnd,Influence,"On success exhaust a card. If you know their actions, decide how one action of their next turn will be played. NEEDS REVIEW",Discard,1 Skill Point,Needs Requirement
 All In,Enemy,Instant,"Attack
-X = Cards discarded",Target up to X enemies. Attack each Target X times. Add X damage to each attack value. NEEDS REVIEW,Exhaust,I'm In,Self,Instant,,Add 25 movement to your turn and return a target card from discard to your hand,Discard,"1 Health, 1 Skill Point",Needs Requirement
-A#,Enemy,Instant,Attack,"Use a Piercing token. If damage is dealt, enemy within 10 feet of target also rolls defense against attack value",Hand,,,,,,,,REVIEW
-Blizzard,Area,Instant,X = Influence,Use a type token. Make an attack against all entities within the area of radius X,Discard,Heat Wave,Area,1 Rnd,"X = Influence
+X = Cards discarded",,Target up to X enemies. Attack each Target X times. Add X damage to each attack value. NEEDS REVIEW,Exhaust,I'm In,Self,Instant,,Add 25 movement to your turn and return a target card from discard to your hand,Discard,"1 Health, 1 Skill Point",Needs Requirement
+A#,Enemy,Instant,Attack,,"Use a Piercing token. If damage is dealt, enemy within 10 feet of target also rolls defense against attack value",Hand,,,,,,,,REVIEW
+Blizzard,Area,Instant,X = Influence,,Use a type token. Make an attack against all entities within the area of radius X,Discard,Heat Wave,Area,1 Rnd,"X = Influence
 Y = Level * X","Choose a spot in range. for an area of radius Y, all die rolls are reduced by X",Exhaust,1 Skill Point,REVIEW
 Covering Fire,Area,1 Rnd,"X = Influence
-Y = X * 5",Attack values of all entities in 5 by Y ft area are reduced by X,Exhaust,Bombardment,Area,X Rnds,"X = Level
+Y = X * 5",,Attack values of all entities in 5 by Y ft area are reduced by X,Exhaust,Bombardment,Area,X Rnds,"X = Level
 Y = Influence * X","Choose a spot in range. for an area of radius Y, make attacks on all targets for X rnds",Exhaust,1 skill point,REVIEW
 Leech ,Enemy,Instant,"Influence
 X = Difference in influence rolls
-Y = Level","On success, target loses X health. You heal up to X + Y health. ",Exhaust,Garden,Area,X Rnds,X = Level,In a 5 foot space create X consumable items. These items last up to X rounds and heal for up to X health.,Exhaust,1 Skill Point,REVIEW
+Y = Level",,"On success, target loses X health. You heal up to X + Y health. ",Exhaust,Garden,Area,X Rnds,X = Level,In a 5 foot space create X consumable items. These items last up to X rounds and heal for up to X health.,Exhaust,1 Skill Point,REVIEW
 Eb,Enemy,Instant,"Attack
-X = Level * 5","Use a Bludgeoning token. If damage is dealt, enemy is launched in a forward direction by X ft",Hand,,,,,,,,REVIEW
-Life Spring,Self,X Rnds,X = Level,Create a circle around you on the ground that is 15 feet in diameter. All allies in this area heal for X on their turn,Exhaust,Transfusion,Ally,Instant,X = Influence,Heal target up to X life then lose that much health,Discard,1 Skill Point,N/A
-Mirror clone,Area,X Rnds,X = Level,"Create a clone of yourself. They gain your movement, and one of your abilities",Exhaust,Banishment,Enemy,Instant,Influence,"On success, one summoned effect is banished",Exhaust,,
+X = Level * 5",,"Use a Bludgeoning token. If damage is dealt, enemy is launched in a forward direction by X ft",Hand,,,,,,,,REVIEW
+Life Spring,Self,X Rnds,X = Level,,Create a circle around you on the ground that is 15 feet in diameter. All allies in this area heal for X on their turn,Exhaust,Transfusion,Ally,Instant,X = Influence,Heal target up to X life then lose that much health,Discard,1 Skill Point,N/A
+Mirror clone,Area,X Rnds,X = Level,,"Create a clone of yourself. They gain your movement, and one of your abilities",Exhaust,Banishment,Enemy,Instant,Influence,"On success, one summoned effect is banished",Exhaust,,
 Fly Swatter,Enemy,Instant,"Attack
-Y = Level + 1","If your attack kills the targetted enemy, gain another attack. Repeat until Y are slain or an enemy survives",Exhaust,Bee Sting,Enemy,Instant,"Attack
+Y = Level + 1",,"If your attack kills the targetted enemy, gain another attack. Repeat until Y are slain or an enemy survives",Exhaust,Bee Sting,Enemy,Instant,"Attack
 X = Level",If your attack deals damage to target enemy then add X to your next attack if it is against that enemy,Discard,1 Health,N/A
 Fated Fervor,Enemy,Instant,"Attack
-X = Level","For each attack that deals damage, you may lose X health and attack again",Exhaust,Retribution Slap,Enemy,Instant,"Attack 
+X = Level",,"For each attack that deals damage, you may lose X health and attack again",Exhaust,Retribution Slap,Enemy,Instant,"Attack 
 X = Missing Health",Add X to attack value,Exhaust,1 Health,N/A
-Life Cycle,Ally,Instant,X = level,"Ally recovers a card from discard. If a life token is used, they recover X in health and 2 cards from discard",Discard,Warmth,Self,3 Rnds,X = Influence,"Determine X at the start of each round. Heal self and allies within 5 ft. by X. If a life token is used, heal for X + 4 instead",Exhaust,2 skill points,4 spirituality
-Drinking of Tears,Area,Instant,,Gain 1 hp for every marked enemy within influence range,Discard,Coming To Collect,Enemy,Instant,,Teleport within 5 ft. of marked target. remove mark from target,Discard,,
-Shift,Self,Instant,,Use a Mind Type Token. Teleport to any unoccupied spot within 30 ft.,Discard,Shifting Sands of Fate,Self,Instant,,exhaust 1 card. Play one card from discard immediately,Discard,,
+Life Cycle,Ally,Instant,X = level,,"Ally recovers a card from discard. If a life token is used, they recover X in health and 2 cards from discard",Discard,Warmth,Self,3 Rnds,X = Influence,"Determine X at the start of each round. Heal self and allies within 5 ft. by X. If a life token is used, heal for X + 4 instead",Exhaust,2 skill points,4 spirituality
+Drinking of Tears,Area,Instant,,,Gain 1 hp for every marked enemy within influence range,Discard,Coming To Collect,Enemy,Instant,,Teleport within 5 ft. of marked target. remove mark from target,Discard,,
+Shift,Self,Instant,,,Use a Mind Type Token. Teleport to any unoccupied spot within 30 ft.,Discard,Shifting Sands of Fate,Self,Instant,,exhaust 1 card. Play one card from discard immediately,Discard,,
 Potion Seller,Self,Instant,"
-Y = influence",Create 3 potions. Each when consumed heal for Y,Exhaust,Botched Brew,Self,Instant,"X = level
+Y = influence",,Create 3 potions. Each when consumed heal for Y,Exhaust,Botched Brew,Self,Instant,"X = level
 Y = influence",Create X potions. Each can be thrown 15 ft. to deal Y damage,Discard,,
-Parkour,,,,"Lots of movement, ability to scale vertically",,,,,,,,,
-takeback,,,,return card from discard,hand,,,,,,,,
-Dempsey Roll,,,,"something that probably lowers defense more and more each round, but leads to higher damage with each round? And allows for an attack each round? Risk reward thing",,,,,,,,,
-The Final Nail,Enemy,Instant,,use a mark to do something cool,,And the hammer that drove it,??,??,,something also with marks?,,,
-Tight 5,,,,Something using charisma,,,,,,,,,
-And the winner is…,,,,,,,,,,,,,
-Flame Oil,Self,X Rnds,X = Level,"enchant a small container of liquid. When broken over a weapon, the next attack made with that weapon does an additional 1d8 fire damage",exhaust,,,,,,,,
+Parkour,,,,,"Lots of movement, ability to scale vertically",,,,,,,,,
+takeback,,,,,return card from discard,hand,,,,,,,,
+Dempsey Roll,,,,,"something that probably lowers defense more and more each round, but leads to higher damage with each round? And allows for an attack each round? Risk reward thing",,,,,,,,,
+The Final Nail,Enemy,Instant,,,use a mark to do something cool,,And the hammer that drove it,??,??,,something also with marks?,,,
+Tight 5,,,,,Something using charisma,,,,,,,,,
+And the winner is…,,,,,,,,,,,,,,
+Flame Oil,Self,X Rnds,X = Level,,"enchant a small container of liquid. When broken over a weapon, the next attack made with that weapon does an additional 1d8 fire damage",exhaust,,,,,,,,
+Deploy Ballista,Area,X Rnds,X is your level,5 ft,Exhaust a card. In designated space create a turret that can be manned. Turret attacks with 2d8 damage and has a range of 50 ft,,,,,,,,,
