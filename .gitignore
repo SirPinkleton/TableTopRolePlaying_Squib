@@ -1,11 +1,4 @@
-card_*.png
-ttcc*.png
-ttwc*.png
-ttec*.png
-ttac*.png
-ttfc*.png
-card*.png
-ttconsc*.png
+_output*
 ~$*
 .DS_Store
 *.lock
