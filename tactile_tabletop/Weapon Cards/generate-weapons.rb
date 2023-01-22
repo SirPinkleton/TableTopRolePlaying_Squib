@@ -1,10 +1,14 @@
 require 'squib'
 require 'game_icons'
 
-data = Squib.csv file: 'Tactile Tabletop Data - Weapons.csv'
+if ARGV[0].nil?
+  data = Squib.csv file: 'Tactile_Tabletop_Data-Weapons.csv'
+else
+  data = Squib.csv file: ARGV[0]
+end
+
 #grabbing icons from https://game-icons.net/
 #using gem game_icons to be able to load them
-
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
 Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
