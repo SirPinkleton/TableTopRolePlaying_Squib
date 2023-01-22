@@ -3,7 +3,7 @@ require 'game_icons'
 
 
 if ARGV[0].nil?
-  data = Squib.csv file: 'CombatObjectiveCards.csv'
+  data = Squib.csv file: 'Tactile_Tabletop_Data-CombatObjectives.csv'
 else
   data = Squib.csv file: ARGV[0]
 end
@@ -42,6 +42,7 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
   ## output file stuff
 
   save_png prefix: 'ttcc_'
+  save_sheet prefix: 'objective_sprue_', sprue: 'letter_poker_card_objectives.yml'
   #save_pdf trim: 37.5
 end
 
@@ -58,5 +59,6 @@ end
   # ## output file stuff
 
   # save_png prefix: 'ttcc_BACK'
+  # save_sheet prefix: 'objective_back_sprue_', sprue: 'letter_poker_card_armors.yml'
   # #save_pdf trim: 37.5
 # end
