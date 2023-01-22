@@ -1,19 +1,4 @@
-﻿#function csvExists($fileToCheck)
-#{
-#    $listOfCurrentCsvs = Get-ChildItem | Where-Object {$_.FullName -match ".csv"}
-#    foreach ($file in $listOfCurrentCsvs)
-#    {
-#        $fileName = $file.Name
-#        Write-Host "###checking if '$fileName' is equal to '$fileToCheck'"
-#        if($fileName -eq $fileToCheck)
-#        {
-#            return $true
-#        }
-#    }
-#    return $false
-#}
-
-
+﻿
 #remove all old output folders
 Write-Host "removing old output folders"
 Write-Host "+++++++++++++++++++++++++++"
@@ -24,59 +9,24 @@ foreach ($outputFolder in $listOfOutputFolders)
 }
 
 #generate new output folders
-$listOfCharacterCardDocuments = Get-ChildItem | Where-Object {$_.FullName -match "CC.csv"}
+$listOfCardDocuments = Get-ChildItem | Where-Object {$_.FullName -match ".csv"}
 write-host ""
 Write-Host "iterating over documents to generate card pngs"
 $failureFound = $false
-foreach ($characterCardDocument in $listOfCharacterCardDocuments)
+foreach ($cardDocument in $listOfCardDocuments)
 {
     if ($failureFound)
     {
         exit
     }
     write-host ""
-    Write-Host "working on $characterCardDocument"
-    Write-Host "+++++++++++++++++++++++++++++++++"
-
-    #$xlsxNameOfDocument = $characterCardDocument.Name
-    #$csvNameOfDocument = $xlsxNameOfDocument -replace ".xlsx",".csv"
-    #Write-Host "__csv version of input file: $csvNameOfDocument"
-
-    #if (csvExists($csvNameOfDocument))
-    #{
-    #    Write-Host "__previous csv found, removing"
-    #    remove-item $csvNameOfDocument
-    #}
-
-    #Write-Host "___generating new csv..."
-    #Write-Host "++++++++++++++++++++++++"
-    #.\XlsToCsv.vbs $xlsxNameOfDocument $csvNameOfDocument
-    #$maxAttempts = 5
-    #$currentAttempt = 0
-    #Write-Host ""
-    #Write-Host "waiting for csv to finish being created..."
-    #while ($currentAttempt -lt $maxAttempts)
-    #{
-    #    if(csvExists($csvNameOfDocument))
-    #    {
-    #        Write-Host "____csv found, operating on it"
-    #        $currentAttempt = 99
-    #    }
-    #    else
-    #    {
-    #        Write-Host "____csv not found, waiting and will check again..."
-    #        $currentAttempt++
-    #        sleep 1
-    #    }
-    #}
-    Write-Host ""
-    #if(csvExists($csvNameOfDocument))
-    #{
-    Write-Host "executing ruby script on the generated csv"
+    $rubyDocument = Get-ChildItem | Where-Object {$_.FullName -match ".rb"}
+    Write-Host "executing ruby script $rubyDocument on the $cardDocument csv"
     Write-Host "++++++++++++++++++++++++++++++++++++++++++"
-    ruby generate-charactercards.rb $characterCardDocument
+    ruby $rubyDocument $cardDocument
 
-    $documentName = $characterCardDocument.Name
+    Write-Host "renaming output folder"
+    $documentName = $cardDocument.Name
     #set the 'content' variable of "$matches" special powershell thing to the part we want to copy
     $documentName -match "_Data-(?<content>.*).csv"
     $docShortName = $matches['content']
@@ -95,15 +45,6 @@ foreach ($characterCardDocument in $listOfCharacterCardDocuments)
         Write-Host "____output folder not generated"
         $failureFound = $true
     }
-    #delete old csv
-    #Write-Host "____removing old csv"
-    #remove-item $csvNameOfDocument
-    #}
-    #else
-    #{
-    #    Write-Host "____failed to generate csv"
-    #    $failureFound = $true
-    #}
     Write-Host "--------------------"
 }
 if ($failureFound)
