@@ -1,33 +1,35 @@
-Name,Challenge,Reward,Flavor,
-Sprint,"Player round must take less than X * 30 seconds, where X is # of players",3,Player Controlled Objective (PCO),
-Perfect,Players take no damage during combat,3,PCO,
-Pinned,Players only use card abilities,2,PCO,
-Marathon,Players use at least 1 non-card action per turn,3,PCO,
-Distanced,Players only make attacks at range greater than 5 ft,2,PCO,
-Grit,Players use no heals,1,PCO,
-Brawl,Players only deal damage with unarmed attacks,5,PCO,
-Spent,Each player must have exhausted 3 cards,2,PCO,
-Reserve,Each player must exhaust no cards,1,PCO,
-Sacrifice,At least one player must be downed,1,PCO,
-Personal,Players only make attacks at range 5 ft or less,2,PCO,
-Confirmed,Final blows on enemies must exceed their remaining health points,1,PCO,
-Persuade,Convince any combatant to stop fighting,1,PCO,
-Poisoned,Each player takes 1 damage at start of their turn,1,Imposed Detriment (ID),
-Buffed,Enemies add 1d4 to their attack rolls,2,ID,
-Handicapped,Each player can't lose more than half their max HP rounded up,3,PCO,
-Extended,All enemy attack's range are increased by 5ft,2,ID,
-Heavy,Player's can't move more than 15 ft per round,2,PCO,
-Exhausted,Cannot return cards from discard,5,PCO,
-Belated,Deal no damage to enemies in the first round,1,PCO,
-Train,Movement must be made in a straight line,1,PCO,*
-Ditch,Each player must use 1 consumable,1,PCO,
-Sore,"Each time a player deals damage, they take 1 damage",2,ID,
-Sun-Blindness,"Whenever a player ends movement outside of a shadow/darkness, all their attack value is reduced by 2",1,ID,
-Recharge,"when players deal damage in one round, they must not deal damage in the subsequent round",3,PCO,
-Together,Each player must end their turn within 15 ft of another player,1,PCO,
-Warped,Enemies gain a 10 ft. teleport they can use once per turn,1,PCO,
-Duplication,"2 enemies player's choose will be cloned (or one enemy will be cloned twice, if only one enemy exists)",2,ID,
-Half-Life,Player's Active card effects must not persist beyond half their usual time rounded up,2,PCO,
-Weakness,"Whenever damage from player is dealt, deal half damage roudned up instead",5,ID,
-Clown,"Clown added to battlefield. Cannot be hurt, moves 15 ft and plays a trick each round",1,ID,
-Disorientation,"Each time a card is played, instead of going to discard/exhaust/hand, it is replaced with a randomly chosen card from the player's deck",3,ID,
+Name,Challenge,Reward,Flavor
+Sprint,"Player round must take less than X * 30 seconds, where X is # of players",3,Player Controlled Objective (PCO)
+Perfect,Players can't take any damage during combat,3,PCO
+Handicapped,Players can't take more than half their max health (rounded up) in damage during combat,3,PCO
+Grit,Players cannot heal,1,PCO
+Shedding,Players must heal 5 points of damage,1,PCO
+Sacrifice,At least one player must be downed,1,PCO
+Pinned,Players can't use non-card abilities,2,PCO
+Marathon,Players must use at least 1 non-card action per turn,3,PCO
+Spent,Each player must exhaust 3 cards by end of combat,2,PCO
+Reserve,Players can't exhaust any cards,1,PCO
+Exhausted,Cannot return cards from discard,5,PCO
+Half-Life,Player's Active card effects must not persist beyond half their usual time rounded up,2,PCO
+Recharge,Players must only deal damage every other round,3,PCO
+Persuade,Convince any combatant to stop fighting,1,PCO
+Confirmed,Final blows on enemies must deal 2 damage more than necessary,1,PCO
+Brawl,Players can only deal damage with unarmed attacks,5,PCO
+Belated,Deal no damage to enemies in the first round,1,PCO
+Distanced,Players can only attack at ranges greater than 5 ft,2,PCO
+Personal,Players can only attack at ranges 5 ft or less,2,PCO
+Heavy,Player's can't move more than 15 ft per round,2,PCO
+Efficiency,2 enemies must be damaged in a single action once this combat,2,PCO
+Train,Movement must be made in a straight line,1,PCO
+Together,Each player must end their turn within 15 ft of another player,1,PCO
+Ditch,Each player must use 1 consumable,1,PCO
+Poisoned,Each player takes 1 damage at start of their turn,1,Imposed Detriment (ID)
+Buffed,Enemies add 1d4 to their attack rolls,2,ID
+Extended,All enemy attack's range are increased by 5ft,2,ID
+Sore,"Each time a player deals damage, they take 1 damage",2,ID
+Sun-Blindness,"Whenever a player ends movement outside of a shadow/darkness, all their attack value is reduced by 2",1,ID
+Duplication,"2 enemies player's choose will be cloned (or one enemy will be cloned twice, if only one enemy exists)",2,ID
+Weakness,"Whenever damage from player is dealt, deal half damage roudned up instead",5,ID
+Clown,"Clown added to battlefield. Cannot be hurt, moves 15 ft and plays a trick each round",1,ID
+Disorientation,"Each time a card is played, instead of going to discard/exhaust/hand, it is replaced with a randomly chosen card from the player's deck",3,ID
+Warped,Enemies gain a 10 ft. teleport they can use once per turn,1,ID
