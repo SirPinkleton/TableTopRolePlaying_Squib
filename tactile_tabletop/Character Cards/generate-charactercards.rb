@@ -319,7 +319,7 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
 
   save_png prefix: 'ttcc_'
   #save_pdf trim: 37.5
-  #save_sheet sprue: 'letter_poker_card_9up.yml'
+  save_sheet sprue: 'letter_poker_card_custom.yml'
 end
 
 #this is for creading the back of the card, right now a single image

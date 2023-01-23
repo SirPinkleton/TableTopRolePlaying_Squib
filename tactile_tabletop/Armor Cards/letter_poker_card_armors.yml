@@ -1,0 +1,45 @@
+---
+#emulating the 8.5in X 11in sheet size, but in the same units as everything else (mm)
+sheet_width: 216mm
+sheet_height: 280mm
+#46.7mm, aka 550px
+card_width: 45mm
+card_height: 45mm
+#using default position_reference, which is :topleft
+#apply a 15mm gap between edge of paper and card, otherwise offsets are the size of the cards cumulative
+cards:
+- x: 15mm #row 1, card 1
+  y: 15mm
+- x: 60mm #row 1, card 2 (right of card 1)
+  y: 15mm
+- x: 105mm #row 1, card 3 (right of card 2)
+  y: 15mm
+- x: 150mm #row 1, card 4 (right of card 3)
+  y: 15mm
+  
+- x: 15mm #row 2, card 5 (below card 1)
+  y: 60mm
+- x: 60mm #row 2, card 6 (right of card 5, below card 2)
+  y: 60mm
+- x: 105mm #row 2, card 7 (right of card 6, below card 3)
+  y: 60mm
+- x: 150mm #row 2, card 8 (right of card 7, below card 4)
+  y: 60mm
+  
+- x: 15mm #row 3, card 9 (below card 5)
+  y: 105mm
+- x: 60mm #row 3, card 10 (right of card 9, below card 6)
+  y: 105mm
+- x: 105mm #row 3, card 11 (right of card 10, below card 7)
+  y: 105mm
+- x: 150mm #row 3, card 12 (right of card 11, below card 8)
+  y: 105mm
+  
+- x: 15mm #row 4, card 13 (below card 9)
+  y: 150mm
+- x: 60mm #row 4, card 14 (right of card 13, below card 10)
+  y: 150mm
+- x: 105mm #row 4, card 15 (right of card 14, below card 11)
+  y: 150mm
+- x: 150mm #row 4, card 16 (right of card 15, below card 12)
+  y: 150mm

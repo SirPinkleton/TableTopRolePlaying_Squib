@@ -1,13 +1,18 @@
 require 'squib'
 require 'game_icons'
 
-data = Squib.csv file: 'Tactile Tabletop Data - Weapons.csv'
+if ARGV[0].nil?
+  data = Squib.csv file: 'Tactile_Tabletop_Data-Weapons.csv'
+else
+  data = Squib.csv file: ARGV[0]
+end
+
 #grabbing icons from https://game-icons.net/
 #using gem game_icons to be able to load them
 
-
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
-Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+#46.7mm is equivalent to 550 pixels. use whichever is easier to track (sprue sheet uses mm, weapon card layout is pixels)
+Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
 
   ## overall card stuff
 
@@ -46,7 +51,7 @@ Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Weapon Name'].si
 
   save_png prefix: 'ttwc_'
   #save_pdf trim: 37.5
-  save_sheet prefix: 'ttwc-print_', columns: 3, rows: 5, margin: 0, gap: 5, trim: 35
+  save_sheet prefix: 'weapon_sprue_', sprue: 'letter_poker_card_weapons.yml'
 
 end
 
@@ -62,5 +67,5 @@ Squib::Deck.new(dpi: 300, width: 820, height: 820, cards: data['Weapon Name'].si
 
   #save_png prefix: 'ttwc_BACK'
   #save_pdf trim: 37.5
-  save_sheet prefix: 'ttwc-print_BACK', columns: 3, rows: 5, margin: 0, gap: 5, trim: 35
+  save_sheet prefix: 'weapon_back_sprue_', sprue: 'letter_poker_card_weapons.yml'
 end

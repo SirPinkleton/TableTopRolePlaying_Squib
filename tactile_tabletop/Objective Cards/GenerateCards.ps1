@@ -1,6 +1,4 @@
 ﻿
-
-
 #remove all old output folders
 Write-Host "removing old output folders"
 Write-Host "+++++++++++++++++++++++++++"
@@ -11,7 +9,7 @@ foreach ($outputFolder in $listOfOutputFolders)
 }
 
 #generate new output folders
-$listOfCardDocuments = Get-ChildItem | Where-Object {$_.FullName -match "Cards.csv"}
+$listOfCardDocuments = Get-ChildItem | Where-Object {$_.FullName -match ".csv"}
 write-host ""
 Write-Host "iterating over documents to generate card pngs"
 $failureFound = $false
@@ -22,17 +20,15 @@ foreach ($cardDocument in $listOfCardDocuments)
         exit
     }
     write-host ""
-    Write-Host "working on $cardDocument"
-    Write-Host "+++++++++++++++++++++++++++++++++"
-
-    Write-Host ""
-    Write-Host "executing ruby script on the csv"
+    $rubyDocument = Get-ChildItem | Where-Object {$_.FullName -match ".rb"}
+    Write-Host "executing ruby script $rubyDocument on the $cardDocument csv"
     Write-Host "++++++++++++++++++++++++++++++++++++++++++"
-    ruby generate-objectivecards.rb $cardDocument
+    ruby $rubyDocument $cardDocument
 
+    Write-Host "renaming output folder"
     $documentName = $cardDocument.Name
     #set the 'content' variable of "$matches" special powershell thing to the part we want to copy
-    $documentName -match "(?<content>.*).csv"
+    $documentName -match "_Data-(?<content>.*).csv"
     $docShortName = $matches['content']
 
     $outputDirName = resolve-path _output -ErrorAction SilentlyContinue
