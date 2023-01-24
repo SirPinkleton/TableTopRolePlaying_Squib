@@ -59,7 +59,8 @@ safe:
    - widthSafeArea
    - heightSafeArea
   radius: 8
-  fill_color: :weldon_blue
+  fill_color: :baby_blue_eyes
+  stroke_width: 10
   #fill_color: '#eee'
 
 # adding 20 pixel buffer from safe area line for clean look
@@ -76,6 +77,7 @@ fromTopLeftSafeToMargin:
   extends:
    - fromLeftSafeToMargin
    - fromTopSafeToMargin
+
   
 ### Text Specification ###
 # Need to specify the font size, x co-ords, width, height, and alignment of all the text
@@ -88,11 +90,18 @@ ArmorTitle:
   font: 'Garamond 16'
   width: -= 40
   height: 70
+  
+titleUnderbar:
+  extends: ArmorTitle
+  height: 1
+  width: -= 40
+  x: += 20
+  y: += 100
 
 #height = total safe area height (460) - buffers from above and below (20*2=40) - height of title (70) - 20 buffer between title and text = 330
 ArmorAbility:
   extends: ArmorTitle
-  y: += 95
+  y: += 125
   font: 'Garamond 12'
   height: 330
 
@@ -102,7 +111,7 @@ ArmorAbility:
 
 backOfCards:
   extends: safe
-  fill_color: :bluebonnet
+  fill_color: :violet_blue
 
 #x = total width (530) - buffers on both side (85*2=170) = 360
 emblemBack:

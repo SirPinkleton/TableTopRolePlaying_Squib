@@ -1,7 +1,12 @@
 Armor Name,Set Ability 1
-Drifter Set,Once per combat you may prevent an overstep attack against you 
-Deflector Set,Once per combat you may reroll a defense value
-Preperation Set,"For one combat per day, you may increase your hand size by 1"
-Marauder Set,"Once per day, if you take damage, you may play an additional action on your next turn"
-Mending Set,Once per combat you may heal up to an amount equal to your level after taking damage
-Clutch Set,"Once per day, if an attack would Down you, set health to 1 instead "
+Drifter Set,Once per combat: prevent an overstep attack against you 
+Deflector Set,Once per combat: reroll a defense value
+Preperation Set,Once per day: increase your hand size for a combat by 1
+Marauder Set,Once per day: Play an additional action after taking damage
+Mending Set,Once per combat: heal up to your level
+Clutch Set,Once per day: set health to 1 instead of becoming Downed
+Heavy Set,Once per combat: increase defense by 3
+Perfumed Set,Once per day: increase influence value by 3
+Explosive Set,Once per day: increase attack by 3
+Speed Set,Once per hour: increase a movement action by 15 feet
+Recovery Set,Once per combat: return a card from discard

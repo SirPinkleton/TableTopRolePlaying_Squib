@@ -19,6 +19,7 @@ Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon
   background color: 'white'
   rect layout: 'cut'
   rect layout: 'safe'
+  rect layout: 'thickerCorners'
   
   text str: data['Weapon Name'], layout: 'WeaponTitle'
   #rect layout: 'WeaponTitle'
@@ -42,30 +43,31 @@ Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon
   svg file: data['Requirement1'].map {|t| "#{t.downcase}.svg" }, layout: 'RequirementsValue1'
   svg file: data['Requirement2'].map {|t| "#{t.downcase}.svg" }, layout: 'RequirementsValue2'
   
-  text str: "Notes:", layout: 'NotesTitle'
-  #rect layout: 'NotesTitle'
+  #text str: "Notes:", layout: 'NotesTitle'
+  rect layout: 'NotesBar'
   text str: data['Extra Notes'], layout: 'NotesValue'
   #rect layout: 'NotesValue'
 
   # ## output file stuff
 
-  save_png prefix: 'ttwc_'
+  save_png prefix: 'weapon_'
   #save_pdf trim: 37.5
   save_sheet prefix: 'weapon_sprue_', sprue: 'letter_poker_card_weapons.yml'
 
 end
 
-Squib::Deck.new(dpi: 300, width: 820, height: 820, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 550, height: 550, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
 
   ## overall card stuff
 
   background color: 'white'
   rect layout: 'cut'
   rect layout: 'backOfCards'
+  rect layout: 'thickerBackCorners'
   svg data: GameIcons.get('swords-emblem').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'emblemBack'
   ## output file stuff
 
-  #save_png prefix: 'ttwc_BACK'
+  save_png prefix: 'weapon_back_'
   #save_pdf trim: 37.5
   save_sheet prefix: 'weapon_back_sprue_', sprue: 'letter_poker_card_weapons.yml'
 end

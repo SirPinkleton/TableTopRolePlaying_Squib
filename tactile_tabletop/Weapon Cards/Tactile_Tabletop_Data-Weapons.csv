@@ -1,14 +1,12 @@
 Weapon Name,Attack Die 1,Attack Die 2,Defense Die,Range,Requirement1,Requirement2,Extra Notes
-Long Shot Weapon,D4,NA,D4,60,1-hand,1-hand,If attacking beyond 30 feet increase attack by 1d6
-Great Castor,D6,NA,D4,40,1-hand,1-hand,When attacking an enemy add 3 damage for every different type of token on that enemy
-Reach Weapon,D6,D4,D6,10,1-hand,1-hand,"Can be thrown at ranges beyond 10 ft:
-Range = 25
-Damage += 1d6"
-Great Weapon,D6,D4,D6,5,1-hand,1-hand,If you slay an enemy add 1d6 to your next attack
-Short Shot Weapon,D4,NA,D4,25,1-hand,NA,If you use two hands on this weapon add 1d4 to damage and 10 feet to range
-Hand Castor,D4,NA,D4,20,1-hand,NA,On dealing damage return a consumed contact token
-Short Weapon,D6,NA,D6,5,1-hand,NA,If your attack die rolls a 1 reroll that die (once per attack roll)
-Blocking Weapon,D4,NA,D8,5,1-hand,NA,If you successfully defend an attack deal 1 damage to enemy
-Hand Weapon,D4,NA,D4,1,1-hand,NA,Add 1 damage for each consecutive attacks on same opponent
+Long Shot Weapon,D4,NA,D4,60,1-hand,1-hand,If attacking an enemy beyond 30 feet then increase attack by 1d6
+Great Castor,D6,NA,D4,40,1-hand,1-hand,If attacking enemy with contact tokens then increase attack by 3 for each unique token type
+Reach Weapon,D6,D4,D6,10,1-hand,1-hand,"Can be thrown, losing the weapon but granting the buffs: Range becomes 25 and attack increases by 1d6"
+Great Weapon,D6,D4,D6,5,1-hand,1-hand,If you slay an enemy then increase next attack by 1d6
+Short Shot Weapon,D4,NA,D4,25,1-hand,NA,If you use two hands on this weapon then increase range by 10 ft and increase attack by 1d4 
+Hand Castor,D4,NA,D4,20,1-hand,NA,If damage dealt with an attack then return a consumed contact token
+Short Weapon,D6,NA,D6,5,1-hand,NA,If an attack die rolls a 1 then reroll that die (once per attack roll)
+Blocking Weapon,D4,NA,D8,5,1-hand,NA,If you successfully defend an attack then deal 1 damage to enemy
+Hand Weapon,D4,NA,D4,1,1-hand,NA,If attacking an enemy for a consecutive round then increase attack by 1 (cumulative)
 Unnarmed,D2,NA,D2,1,1-hand,NA,NA
-Utility Weapon,D4,NA,D6,35,1-hand,1-hand,"Roll a die at start of turn. If even, an ally can return a random card from discard"
+Utility Weapon,D4,NA,D6,35,1-hand,1-hand,Roll a die at start of turn. If it's even then an ally can return a random card from discard

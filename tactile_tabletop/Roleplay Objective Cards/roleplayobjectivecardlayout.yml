@@ -1,0 +1,236 @@
+### Borders & Boundaries ###
+
+#width/height (and calculated x/y offsets) provided by template from BoardGameMaker.com, see poker-size.pdf
+#overall card size in manufacturing: width: 822, height: 1122 (2.74 x 3.74)
+  
+## Card Overall Dimensions
+  
+# box for cut line
+
+#822 - 750 = 72 ; 72 /2 = 36
+fromLeftBleedToCut:
+  #x: 36
+  x: 0
+  
+#1122 - 1050 = 72
+fromTopBleedToCut:
+  #y: 36
+  y: 0
+  
+fromTopLeftBleedToCut:
+  extends:
+   - fromLeftBleedToCut
+   - fromTopBleedToCut
+   
+# The "cut area line", everything outside of this area guaranteed to be lost
+cut:
+  extends: fromTopLeftBleedToCut
+  width: 1050
+  height: 750
+  radius: 16
+  fill_color: :black
+  
+# box for safe line
+
+#750 - 690 = 60
+fromLeftCutToSafe:
+  extends: fromLeftBleedToCut
+  x: += 30
+  
+#1050 - 990 = 60
+fromTopCutToSafe:
+  extends: fromTopBleedToCut
+  y: += 30
+
+fromTopLeftCutToSafe:
+  extends: 
+   - fromTopCutToSafe
+   - fromLeftCutToSafe
+   
+widthSafeArea:
+  width: 990
+  
+heightSafeArea:
+  height: 690
+  
+# the "safe area line", everything inside of this area guaranteed to be saved
+safe:
+  extends: 
+   - fromTopLeftCutToSafe
+   - widthSafeArea
+   - heightSafeArea
+  radius: 8
+  #dash: 3 3
+  fill_color: :deep_peach
+  
+# adding 20 pixel buffer from safe area line for clean look
+
+fromLeftSafeToMargin:
+  extends: fromLeftCutToSafe
+  x: += 20
+  
+fromTopSafeToMargin:
+  extends: fromTopCutToSafe
+  y: += 20
+
+fromTopLeftSafeToMargin:
+  extends:
+   - fromLeftSafeToMargin
+   - fromTopSafeToMargin
+  
+### Text Specification ###
+# Need to specify the font size, x co-ords, width, height, and alignment of all the text
+
+title:
+  extends:
+   - fromTopLeftSafeToMargin
+   - widthSafeArea
+  height: 100
+  align: center
+  font: 'Garamond 18'
+  color: :black
+  align: center
+  width: -= 40
+  
+lineUnderTitle:
+  extends:
+   - title
+  height: 1.5
+  y: += 120
+  
+rules:
+  extends: lineUnderTitle
+  height: 400
+  x: += 40
+  width: -= 80
+  y: += 50
+  font: 'Garamond 14'
+  valign: middle
+  
+reward:
+  extends: rules
+  height: 50
+  width: 40
+  x: += 740
+  y: += 430
+  font: 'Garamond 11'
+
+rewardHeader:
+  extends: reward
+  x: -= 180
+  width: 200
+
+### card flair ###
+# black corner lines, maed out of triangles
+  
+topLeftTriangleFirst:
+  x1: 30
+  y1: 120
+  x2: 120
+  y2: 30
+  x3: 160
+  y3: 30
+  fill_color: :white
+  stroke_color: :white
+  
+topLeftTriangleSecond:
+  x1: 30
+  y1: 120
+  x2: 30
+  y2: 160
+  x3: 160
+  y3: 30
+  fill_color: :white
+  stroke_color: :white
+  
+#height is 750, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
+#750 - 30 - 120 = inner bottom of one line = 600?
+bottomLeftTriangleFirst:
+  x1: 30
+  y1: 630
+  x2: 30
+  y2: 590
+  x3: 120
+  y3: 720
+  fill_color: :white
+  stroke_color: :white
+  
+bottomLeftTriangleSecond:
+  x1: 30
+  y1: 590
+  x2: 120
+  y2: 720
+  x3: 160
+  y3: 720
+  fill_color: :white
+  stroke_color: :white
+  
+#width is 1050, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
+#1050 - 30 - 120 - 10 (?) = inner top of one line = 910
+topRightTriangleFirst:
+  x1: 920
+  y1: 30
+  x2: 880
+  y2: 30
+  x3: 1020
+  y3: 160
+  fill_color: :white
+  stroke_color: :white
+  
+topRightTriangleSecond:
+  x1: 920
+  y1: 30
+  x2: 1020
+  y2: 160
+  x3: 1020
+  y3: 120
+  fill_color: :white
+  stroke_color: :white
+
+bottomRightTriangleFirst:
+  x1: 920
+  y1: 720
+  x2: 880
+  y2: 720
+  x3: 1020
+  y3: 590
+  fill_color: :white
+  stroke_color: :white
+  
+bottomRightTriangleSecond:
+  x1: 920
+  y1: 720
+  x2: 1020
+  y2: 590
+  x3: 1020
+  y3: 630
+  fill_color: :white
+  stroke_color: :white
+  
+  
+## back of card
+
+
+backOfCards:
+  extends: safe
+  fill_color: :saddle_brown
+
+diceBack:
+  x: 430
+  y: 250
+  width: 250
+  height: 250
+  angle: 2
+
+cardBack:
+  x: 750
+  y: 120
+  width: 250
+  height: 250
+  angle: 120
+  
+tokensBack:
+  x: 370
+  y: 370
+  width: 250
+  height: 250
