@@ -9,13 +9,13 @@
 
 #822 - 750 = 72 ; 72 /2 = 36
 fromLeftBleedToCut:
-  #x: 36
-  x: 0
+  x: 36
+  #x: 0
   
-#1122 - 1050 = 72
+#1122 - 1050 = 72 ; 72 / 2 = 36
 fromTopBleedToCut:
-  #y: 36
-  y: 0
+  y: 36
+  #y: 0
   
 fromTopLeftBleedToCut:
   extends:
@@ -546,20 +546,34 @@ backOfCards:
 
 diceBack:
   x: 430
-  y: 420
+  y: 380
   width: 250
   height: 250
   angle: 2
 
 cardBack:
   x: 550
-  y: 290
+  y: 250
   width: 250
   height: 250
   angle: 120
   
 tokensBack:
   x: 270
-  y: 500
+  y: 460
   width: 250
   height: 250
+  
+#822,1122 are card width
+#start x and Y from the overall card safe area co-ord
+#want width of overall card
+#height is size of text... doesn't really matter unless it's too small
+#increase y until it's below the graphics (roughly 2/3 of overall height, which is 1050, so ~700)
+companyLogo:
+  extends: 
+   - fromTopLeftCutToSafe
+   - widthSafeArea
+  height: 80
+  y: += 640
+  align: center
+  font: 'Garamond 14'
