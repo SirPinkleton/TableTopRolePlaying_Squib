@@ -11,7 +11,9 @@ else
 end
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf included in this directory
-Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the below for home printing, the following for professionial printing
+#Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
 
   ## overall card stuff
 
@@ -316,14 +318,17 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
   text str: data['ID'], layout: 'cardNumber'
 
   ## output file stuff
-
+  
+  #save each individual card: good for review and professional printing
   save_png prefix: 'ttcc_'
-  #save_pdf trim: 37.5
-  save_sheet sprue: 'letter_poker_card_custom.yml'
+  #save a sheet of cards all together: good for home printing
+  #save_sheet sprue: 'letter_poker_card_custom.yml'
 end
 
 #this is for creading the back of the card, right now a single image
-Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'charactercardlayout.yml')  do
+#use the below for home printing, the following for professionial printing
+#Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'charactercardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: 1, layout: 'charactercardlayout.yml')  do
 
   ## overall card stuff
 
@@ -333,6 +338,9 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'character
   svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
   svg data: GameIcons.get('card-random').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'cardBack'
   svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
+  text str: "Tactile Tabletop", layout: 'companyLogo'
+  #rect layout: 'companyLogo'
+
   ## output file stuff
 
   save_png prefix: 'ttcc_BACK'
