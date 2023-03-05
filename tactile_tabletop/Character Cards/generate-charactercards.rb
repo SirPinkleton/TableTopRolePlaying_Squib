@@ -10,14 +10,24 @@ else
   data = Squib.csv file: ARGV[0]
 end
 
+
 ##    Overall card design concepts
 # Cards have multiple sections: Bleed, Cut, and Safe
 # Bleed is the part of the card you expect to be chopped off by manufacturing
 # Cut is stuff that might be cut into by machines, and effectively it is a border around the card
 # Safe is the contents of the card. this should never be cut by the machine, otherwise you want to get a refund
 # 
-# Typical card sleeves, and cards in general, use Poker Cards as the dimensions.
-# for Poker cards, the Bleed has a width of 822 and height of 1122; the Cut is 750 by 1050; the Safe is 
+# Typical card sleeves, and cards in general, use Poker Cards for their dimentions.
+# for Poker cards, the dimensions in pixels are: Bleed width of 822 and height of 1122; Cut width of 750 and height of 1050; Safe width of 690 by a height of 990
+# using the above dimensions with center horizontal and vertical alignment, you end up with a border of 36 pixels for the bleed, a border of 30 pixels for the cut,
+# and everything else in inside is the Safe content
+# 
+# put another way, the overall width and height is 822 and 1122 respectively.
+# putting a 36 pixel buffer on the left and right is 36 * 2 = 72 pixels
+# same for top and bottom
+# this is what makes the size of the Cut as 750 width (822 - (36*2) = 750) and 1050 height (1122 - (36*2) = 1050)
+# same process of taking a 30 pixel border for the cut produces a Safe width of 690 (750 - (30*2) = 690) and height of 990 (1050 - (30*2) = 990)
+
 
 
 
