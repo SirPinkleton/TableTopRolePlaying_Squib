@@ -8,14 +8,16 @@
 # box for cut line
 
 #822 - 750 = 72 ; 72 /2 = 36
+#if this is home printing, use 0
+#else, use 36
 fromLeftBleedToCut:
   x: 36
-  #x: 0
   
 #1122 - 1050 = 72 ; 72 / 2 = 36
+#if this is home printing, use 0
+#else, use 36
 fromTopBleedToCut:
   y: 36
-  #y: 0
   
 fromTopLeftBleedToCut:
   extends:
