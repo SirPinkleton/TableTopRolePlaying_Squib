@@ -3,23 +3,38 @@ require 'squib'
 #icons are grabbed from https://game-icons.net/
 require 'game_icons'
 
-#this file is designed to be given the name of a .csv file to parse. it can handle a default value if none are provided, for fast prototyping
+#this file is designed to be given the name of a .csv file to parse
 if ARGV[0].nil?
   data = Squib.csv file: 'Tactile_Tabletop_Data-Level_1_CC.csv'
 else
   data = Squib.csv file: ARGV[0]
 end
 
+##    Overall card design concepts
+# Cards have multiple sections: Bleed, Cut, and Safe
+# Bleed is the part of the card you expect to be chopped off by manufacturing
+# Cut is stuff that might be cut into by machines, and effectively it is a border around the card
+# Safe is the contents of the card. this should never be cut by the machine, otherwise you want to get a refund
+# 
+# Typical card sleeves, and cards in general, use Poker Cards as the dimensions.
+# for Poker cards, the Bleed has a width of 822 and height of 1122; the Cut is 750 by 1050; the Safe is 
+
+
+
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf included in this directory
-#use the below for home printing, the following for professionial printing
+#use the below for home printing (no whitespace around cards, leading to fewer cuts)
 #Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the following for professionial printing (extra whitespace their machines are accounting for existing)
 Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
 
   ## overall card stuff
 
+  #if the safety margin (cut) is black, need this background to be white in order to see it
   background color: 'white'
   #the rectangle border where the poker card should be cut (see poker-size.pdf)
   rect layout: 'cut'
+
+  ## 
 
   #some default values to draw from for painting the stat lines
   #we want these bars to be visible around the border, so we're drawing them before the abilities and other parts of the card
