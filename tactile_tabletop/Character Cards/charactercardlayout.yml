@@ -576,6 +576,11 @@ companyLogo:
    - fromTopLeftCutToSafe
    - widthSafeArea
   height: 80
-  y: += 640
+  y: += 650
   align: center
-  font: 'Garamond 14'
+  font: 'Garamond 20'
+  color: 'white'
+  
+backgroundImage:
+  extends: fromTopLeftCutToSafe
+  
