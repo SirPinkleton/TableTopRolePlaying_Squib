@@ -6,3 +6,5 @@ _output*
 *.bak
 *.numbers
 *.pages
+*.kra~
+*.png~
