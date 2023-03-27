@@ -12,11 +12,14 @@ end
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
 #45mm is equivalent to 530px
-Squib::Deck.new(dpi: 300, width: '45mm', height: '45mm', cards: data['Armor Name'].size, layout: 'armorcardlayout.yml')  do
+#use for home printing
+#Squib::Deck.new(dpi: 300, width: '45mm', height: '45mm', cards: data['Armor Name'].size, layout: 'armorcardlayout.yml')  do
+#use for professional printing
+Squib::Deck.new(dpi: 300, width: 700, height: 700, cards: data['Armor Name'].size, layout: 'armorcardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
+  background color: '#888'
   rect layout: 'cut'
   rect layout: 'safe'
   
@@ -34,11 +37,11 @@ Squib::Deck.new(dpi: 300, width: '45mm', height: '45mm', cards: data['Armor Name
   save_sheet prefix: 'armor_sprue_', sprue: 'letter_poker_card_armors.yml'
 end
 
-Squib::Deck.new(dpi: 300, width: 530, height: 530, cards: data['Armor Name'].size, layout: 'armorcardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 700, height: 700, cards: data['Armor Name'].size, layout: 'armorcardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
+  background color: '#888'
   rect layout: 'cut'
   rect layout: 'backOfCards'
   svg data: GameIcons.get('swords-emblem').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'emblemBack'
