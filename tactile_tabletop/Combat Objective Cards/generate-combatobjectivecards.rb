@@ -13,11 +13,13 @@ end
 
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
-Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'combatobjectivecardlayout.yml')  do
+#Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the following for professionial printing (extra whitespace their machines are accounting for existing)
+Squib::Deck.new(dpi: 300, width: 1122, height: 822, cards: data['Name'].size, layout: 'combatobjectivecardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
+  background color: 'black'
   rect layout: 'cut'
   rect layout: 'safe'
   #rect layout: 'title'
@@ -49,16 +51,16 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
 
   ## output file stuff
 
-  save_png prefix: 'objective_'
+  save_png prefix: 'c_objective_'
   save_sheet prefix: 'objective_sprue_', sprue: 'letter_poker_card_objectives.yml'
   #save_pdf trim: 37.5
 end
 
-Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, layout: 'combatobjectivecardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 1122, height: 822, cards: data['Name'].size, layout: 'combatobjectivecardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
+  background color: 'black'
   rect layout: 'cut'
   rect layout: 'backOfCards'
   svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
@@ -66,7 +68,7 @@ Squib::Deck.new(dpi: 300, width: 1050, height: 750, cards: data['Name'].size, la
   svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
   ## output file stuff
 
-  save_png prefix: 'objective_back_'
+  save_png prefix: 'c_objective_back_'
   save_sheet prefix: 'objective_back_sprue_', sprue: 'letter_poker_card_objectives.yml'
   #save_pdf trim: 37.5
 end

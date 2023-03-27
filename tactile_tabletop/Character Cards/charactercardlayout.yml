@@ -578,7 +578,7 @@ companyLogo:
   height: 80
   y: += 650
   align: center
-  font: 'Garamond 20'
+  font: 'Garamond Bold 20'
   color: 'white'
   
 backgroundImage:

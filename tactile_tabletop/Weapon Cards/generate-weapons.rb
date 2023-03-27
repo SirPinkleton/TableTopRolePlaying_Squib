@@ -12,7 +12,10 @@ end
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
 #46.7mm is equivalent to 550 pixels. use whichever is easier to track (sprue sheet uses mm, weapon card layout is pixels)
-Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+#use below for home printing
+#Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+#use below for professional printing
+Squib::Deck.new(dpi: 300, width: 700, height: 700, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
 
   ## overall card stuff
 
@@ -56,7 +59,7 @@ Squib::Deck.new(dpi: 300, width: '46.7mm', height: '46.7mm', cards: data['Weapon
 
 end
 
-Squib::Deck.new(dpi: 300, width: 550, height: 550, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
+Squib::Deck.new(dpi: 300, width: 700, height: 700, cards: data['Weapon Name'].size, layout: 'weaponcardlayout.yml')  do
 
   ## overall card stuff
 

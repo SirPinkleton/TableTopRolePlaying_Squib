@@ -9,13 +9,11 @@
 
 #822 - 750 = 72 ; 72 /2 = 36
 fromLeftBleedToCut:
-  #x: 36
-  x: 0
+  x: 36
   
 #1122 - 1050 = 72
 fromTopBleedToCut:
-  #y: 36
-  y: 0
+  y: 36
   
 fromTopLeftBleedToCut:
   extends:
@@ -29,6 +27,7 @@ cut:
   height: 1050
   radius: 16
   fill_color: :gold
+  stroke_width: 0
   
 # box for safe line
 
@@ -448,9 +447,9 @@ passivesTitle:
 #often `# health`, `# stats`, or both
 passivesBody:
   extends: passivesTitle
-  x: += 145
-  width: 495
-  height: 130
+  x: -= 15
+  width: 675
+  height: 170
   align: center
 
 

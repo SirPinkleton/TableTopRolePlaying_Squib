@@ -9,13 +9,13 @@
 
 #822 - 750 = 72 ; 72 /2 = 36
 fromLeftBleedToCut:
-  #x: 36
-  x: 0
+  x: 36
+  #x: 0
   
 #1122 - 1050 = 72
 fromTopBleedToCut:
-  #y: 36
-  y: 0
+  y: 36
+  #y: 0
   
 fromTopLeftBleedToCut:
   extends:
@@ -61,7 +61,7 @@ safe:
    - heightSafeArea
   radius: 8
   #dash: 3 3
-  fill_color: :yellow
+  fill_color: :beige
   
 # adding 20 pixel buffer from safe area line for clean look
 
@@ -124,79 +124,79 @@ rewardHeader:
 # black corner lines, maed out of triangles
   
 topLeftTriangleFirst:
-  x1: 30
-  y1: 120
-  x2: 120
-  y2: 30
-  x3: 160
-  y3: 30
+  x1: 36
+  y1: 156
+  x2: 156
+  y2: 36
+  x3: 196
+  y3: 36
   fill_color: black
   
 topLeftTriangleSecond:
-  x1: 30
-  y1: 120
-  x2: 30
-  y2: 160
-  x3: 160
-  y3: 30
+  x1: 36
+  y1: 156
+  x2: 36
+  y2: 196
+  x3: 196
+  y3: 36
   fill_color: black
   
 #height is 750, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
 #750 - 30 - 120 = inner bottom of one line = 600?
 bottomLeftTriangleFirst:
-  x1: 30
-  y1: 630
-  x2: 30
-  y2: 590
-  x3: 120
-  y3: 720
+  x1: 36
+  y1: 666
+  x2: 36
+  y2: 626
+  x3: 156
+  y3: 756
   fill_color: black
   
 bottomLeftTriangleSecond:
-  x1: 30
-  y1: 590
-  x2: 120
-  y2: 720
-  x3: 160
-  y3: 720
+  x1: 36
+  y1: 626
+  x2: 156
+  y2: 756
+  x3: 196
+  y3: 756
   fill_color: black
   
 #width is 1050, border is 30 pixels thick, bars start 90 pixels from the corner and are themselves 40 pixels thick
 #1050 - 30 - 120 - 10 (?) = inner top of one line = 910
 topRightTriangleFirst:
-  x1: 920
-  y1: 30
-  x2: 880
-  y2: 30
-  x3: 1020
-  y3: 160
+  x1: 956
+  y1: 36
+  x2: 916
+  y2: 36
+  x3: 1056
+  y3: 196
   fill_color: black
   
 topRightTriangleSecond:
-  x1: 920
-  y1: 30
-  x2: 1020
-  y2: 160
-  x3: 1020
-  y3: 120
+  x1: 956
+  y1: 36
+  x2: 1056
+  y2: 196
+  x3: 1056
+  y3: 156
   fill_color: black
 
 bottomRightTriangleFirst:
-  x1: 920
-  y1: 720
-  x2: 880
-  y2: 720
-  x3: 1020
-  y3: 590
+  x1: 956
+  y1: 756
+  x2: 916
+  y2: 756
+  x3: 1056
+  y3: 626
   fill_color: black
   
 bottomRightTriangleSecond:
-  x1: 920
-  y1: 720
-  x2: 1020
-  y2: 590
-  x3: 1020
-  y3: 630
+  x1: 956
+  y1: 756
+  x2: 1056
+  y2: 626
+  x3: 1056
+  y3: 666
   fill_color: black
   
   
@@ -215,14 +215,14 @@ diceBack:
   angle: 2
 
 cardBack:
-  x: 750
+  x: 850
   y: 120
   width: 250
   height: 250
   angle: 120
   
 tokensBack:
-  x: 370
+  x: 420
   y: 370
   width: 250
   height: 250
