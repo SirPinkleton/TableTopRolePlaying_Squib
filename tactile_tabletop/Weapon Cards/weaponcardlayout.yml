@@ -9,13 +9,13 @@
 
 #600 - 530 = 70 ; 70 /2 = 35
 fromLeftBleedToCut:
-  x: 0
-  #x: 35
+  #x: 0
+  x: 36
   
 #600 - 530 = 70 ; 70 /2 = 35
 fromTopBleedToCut:
-  y: 0
-  #y: 35
+  #y: 0
+  y: 36
   
 fromTopLeftBleedToCut:
   extends:
@@ -25,8 +25,8 @@ fromTopLeftBleedToCut:
 # The "cut area line", everything outside of this area guaranteed to be lost
 cut:
   extends: fromTopLeftBleedToCut
-  width: 550
-  height: 550
+  width: 628
+  height: 628
   radius: 16
   fill_color: '#555'
   
@@ -34,11 +34,11 @@ cut:
 
 fromLeftCutToSafe:
   extends: fromLeftBleedToCut
-  x: += 35
+  x: += 36
   
 fromTopCutToSafe:
   extends: fromTopBleedToCut
-  y: += 35
+  y: += 36
 
 fromTopLeftCutToSafe:
   extends: 
@@ -50,10 +50,10 @@ fromTopLeftCutToSafe:
 
 #total width (530) - 35 buffer on both sides (35*2=70) = 460
 widthSafeArea:
-  width: 480
+  width: 556
 
 heightSafeArea:
-  height: 480
+  height: 556
   
 safe:
   extends: 
@@ -101,15 +101,15 @@ WeaponTitle:
    - fromTopLeftSafeToMargin
    - widthSafeArea
   width: -= 40
-  height: 45
+  height: 50
   align: center
-  font: 'Garamond 10'
+  font: 'Garamond 11'
 
 #y = height of title we're deriving from (45) + 20 pixel buffer
 AttackTitle:
   extends: WeaponTitle
-  y: += 65
-  #x: += 20
+  y: += 70
+  x: += 20
   align: left
   font: 'Garamond 9'
   width: 200
@@ -123,31 +123,31 @@ AttackDie1:
   extends: 
    - AttackTitle
    - iconsWidthHeight
-  x: += 110
+  x: += 120
   y: -= 5
   
 AttackDie2:
   extends: AttackDie1
-  x: += 50
+  x: += 55
   
 #x = width of attack die (200) + 40 buffer = 240
 #width = total space (430) - offset (220) = 210
 DefenseTitle:
   extends: AttackTitle
-  x: += 230
+  x: += 270
   width: 210
   
 DefenseDie:
   extends: 
    - DefenseTitle
    - iconsWidthHeight
-  x: += 140
+  x: += 135
   y: -= 5
   
 #y = height of attack title we're deriving from (40) + 20 buffer
 RangeTitle:
   extends: AttackTitle
-  y: += 60
+  y: += 70
   #x: += 15
   width: 100
   
@@ -162,8 +162,8 @@ RangeValue:
 #x = same as defense title (220) - extra space to the right of range (40)
 RequirementsTitle:
   extends: DefenseTitle
-  y: += 60
-  x: -= 40
+  y: += 70
+  x: -= 60
   width: 140
 
 #x = length of RequirementsTitle (140) + 20 pixel buffer
@@ -171,12 +171,12 @@ RequirementsValue1:
   extends: 
    - RequirementsTitle
    - iconsWidthHeight
-  x: += 140
+  x: += 150
   y: -= 5
 
 RequirementsValue2:
   extends: RequirementsValue1
-  x: += 50
+  x: += 65
 
 #width - 20*2 buffer on either side
 NotesBar:
@@ -184,7 +184,8 @@ NotesBar:
    - RangeTitle
    - heightSafeArea
    - widthSafeArea
-  y: += 70
+  y: += 90
+  x: -= 20
   align: center
   width: -= 40
   height: 1
@@ -202,8 +203,9 @@ NotesBar:
 #height = total height (430) - height used up for attack/defense and buffer (60) - height used up for range/requirements (60) - height of notes title and buffer (70) -20? = 220
 NotesValue:
   extends: NotesBar
-  y: += 20
-  height: 185
+  y: += 30
+  height: 195
+  font: 'Garamond 10'
   
 
 ## back of card
@@ -219,9 +221,9 @@ thickerBackCorners:
   radius: 120
   fill_color: :crimson_red
   
-#x = total width (530) - buffers on both side (85*2=170) = 360
 emblemBack:
-  x: 85
-  y: 95
-  width: 360
-  height: 340
+  extends: fromTopLeftCutToSafe
+  x: += 25
+  y: += 40
+  width: 495
+  height: 475

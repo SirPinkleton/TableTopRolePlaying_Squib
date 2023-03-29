@@ -3,37 +3,79 @@ require 'squib'
 #icons are grabbed from https://game-icons.net/
 require 'game_icons'
 
-#this file is designed to be given the name of a .csv file to parse. it can handle a default value if none are provided, for fast prototyping
+#this file is designed to be given the name of a .csv file to parse
 if ARGV[0].nil?
   data = Squib.csv file: 'Tactile_Tabletop_Data-Level_1_CC.csv'
 else
   data = Squib.csv file: ARGV[0]
 end
 
+
+##    Overall card design concepts
+# Cards have multiple sections: Bleed, Cut, and Safe
+# Bleed is the part of the card you expect to be chopped off by manufacturing
+# Cut is stuff that might be cut into by machines, and effectively it is a border around the card
+# Safe is the contents of the card. this should never be cut by the machine, otherwise you want to get a refund
+# 
+# Typical card sleeves, and cards in general, use Poker Cards for their dimentions.
+# for Poker cards, the dimensions in pixels are: Bleed width of 822 and height of 1122; Cut width of 750 and height of 1050; Safe width of 690 by a height of 990
+# using the above dimensions with center horizontal and vertical alignment, you end up with a border of 36 pixels for the bleed, a border of 30 pixels for the cut,
+# and everything else in inside is the Safe content
+# 
+# put another way, the overall width and height is 822 and 1122 respectively.
+# putting a 36 pixel buffer on the left and right is 36 * 2 = 72 pixels
+# same for top and bottom
+# this is what makes the size of the Cut as 750 width (822 - (36*2) = 750) and 1050 height (1122 - (36*2) = 1050)
+# same process of taking a 30 pixel border for the cut produces a Safe width of 690 (750 - (30*2) = 690) and height of 990 (1050 - (30*2) = 990)
+
+
+
+
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf included in this directory
-Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the below for home printing (no whitespace around cards, leading to fewer cuts)
+#Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the following for professionial printing (extra whitespace their machines are accounting for existing)
+Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
 
-  ## overall card stuff
+  ### overall card stuff
 
-  background color: 'white'
-  #the rectangle border where the poker card should be cut (see poker-size.pdf)
+  #if the safety margin (cut) is black, need this background to be white in order to see it
+  background color: 'red'
+  #This rect call will give the card a black border, of the size of a poker card after it's cut
   rect layout: 'cut'
 
-  #some default values to draw from for painting the stat lines
+  ### Constructing Stat Bars
+  
+  # This approach applies a color to the Cut, to make the stat requirements for higher level cards more easy to spot at a glance
+  # how this was done was to create a very wide and stout height, and then apply an angle
+  # math is done so that multiple points of a 1 or more stats stack on top of each other, from top to bottom
   #we want these bars to be visible around the border, so we're drawing them before the abilities and other parts of the card
-  #we want these bars to cover multiple parts of the border so its easy to see regardless of how the card is oriented, so it has a high width
-  defaultwidth = 2000
-  #we want these bars to be otherwise not too high, so that we can stack them together. we also want to grow them downwards, so they shoulw be negative
-  defaultHeight = -40
-  #having a skewed angle allows them to cover both sides of the border, and it looks snazzy
-  defaultAngle = 10
-  #the x offset sets where the bar starts horizontally, and we want it to be low and to the right, shooting left and up.
-  #card width is 750, with an angle, we want to start a little further to the right
+  
+  
+  #some default values to draw from for painting the stat lines
+  #having a skewed angle allows them to cover both sides of the border, and it looks snazzy.
+  #angles in squib are weird. the higher the value, the more it rotates in a clockwise rotation
+  #the units aren't specified in the documentation. 90 doesn't mean 90 radians; the difference between 9 and 10 is closer to 90 degrees.
+  #originally we used a value of 10, discovered with lots of testing. -2.55 is roughly the same orientation, but rotating counter clockwise
+  #you're encouraged to try value differences in .1 increments for tweaking, it seems to just take experimenting. See near the end of this Deck.new() call for prototyping angles
+  defaultAngle = -2.55
+  #the x offset sets where the bar starts horizontally. we could start high and to the left, shooting down and to the right towards the card, or reverse of this. Depends on the angle of the bars.
+  #We chose low and to the right, so we'll be shooting left and up.
+  #we stumbled into 1000 being a decent value, paired with the angle it makes the bar hit the top of the side of the card
   defaultXOffset = 1000
-  #this controls how high or low the bar starts. with this angle and x value, 570 looks good
+  #we want these bars to cover multiple parts of the border so its easy to see regardless of how the card is oriented. with the above angle and x value,
+  #we need a width somewhere around 2000 in order to cover the distance
+  defaultwidth = 2000
+  #we want these bars to be otherwise not too high, so that we can stack multiple together. we also want to grow them downwards, so they should be negative
+  #-40 was found with yet more tweaking and trying out values
+  defaultHeight = -40
+  #usually don't want the stroke, the fill_color is sufficient
+  defaultStrokeWidth = 0
+  #this controls how high or low the bar starts. with this angle, x value, and width, 720 looks good: the right-middle and top left of the card get covered by the first bar, and it grows downward from there
   #also, create it as an array of values aligning with the number of cards for math tricks later
   baseYOffset = data['Perception Requirements'].map {|c| 720}
-
+  
+  # colors of the bars. aligns with the colors in the user manual, but could be anything really
   perceptionBorderColor = '#00ffff'
   vigorBorderColor = '#008000'
   finesseBorderColor = '#ffc0cb'
@@ -44,9 +86,11 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
   craftmanshipBorderColor = '#ffffff'
 
 
+  ## Creating Perception bars
+
   #if this card has no perception, then height offset to use is 0
-  #this would mean the card is not visible (height of 0) and the following bar wouldn't be moved down at all (yoffset of 0)
-  #otherwise, this bar's height is a multiple of 30 from what it is
+  #this would mean the bar is not visible (height of 0) and the following bar wouldn't be moved down at all (yoffset of 0)
+  #otherwise, this Perception bar is a multiple of defaultHeight from what it is
   perceptionToHeightMapping = data['Perception Requirements'].map {|value| value * defaultHeight}
 
   #since perception is the first stat line, set its offsets = base
@@ -58,8 +102,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: perceptionToHeightMapping,
     angle: defaultAngle,
     fill_color: perceptionBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Vigor bars
+  
   #like before, we need to figure out how big this stat bar is
   vigorToHeightMapping = data['Vigor Requirements'].map {|value| value * defaultHeight}
 
@@ -82,8 +128,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: vigorToHeightMapping,
     angle: defaultAngle,
     fill_color: vigorBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Finesse bars
+  
   #same as above, but for finesse
   finesseToHeightMapping = data['Finesse Requirements'].map {|value| value * defaultHeight}
 
@@ -96,8 +144,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: finesseToHeightMapping,
     angle: defaultAngle,
     fill_color: finesseBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Knowledge bars
+  
   #same as the above, but for knowledge
   knowledgeToHeightMapping = data['Knowledge Requirements'].map {|value| value * defaultHeight}
 
@@ -110,8 +160,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: knowledgeToHeightMapping,
     angle: defaultAngle,
     fill_color: knowledgeBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Strength bars
+  
   #same as the above, but for strength
   strengthToHeightMapping = data['Strength Requirements'].map {|value| value * defaultHeight}
 
@@ -124,8 +176,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: strengthToHeightMapping,
     angle: defaultAngle,
     fill_color: strengthBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Spirituality bars
+  
   #same as the above, but for spirituality
   spiritualityToHeightMapping = data['Spirituality Requirements'].map {|value| value * defaultHeight}
 
@@ -138,8 +192,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: spiritualityToHeightMapping,
     angle: defaultAngle,
     fill_color: spiritualityBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Charisma bars
+  
   #same as the above, but for charisma
   charismaToHeightMapping = data['Charisma Requirements'].map {|value| value * defaultHeight}
 
@@ -152,8 +208,10 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: charismaToHeightMapping,
     angle: defaultAngle,
     fill_color: charismaBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## Creating Craftmanship bars
+  
   #same as the above, but for craftmanship
   craftmanshipToHeightMapping = data['Craftmanship Requirements'].map {|value| value * defaultHeight}
 
@@ -166,15 +224,19 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
     height: craftmanshipToHeightMapping,
     angle: defaultAngle,
     fill_color: craftmanshipBorderColor,
-    stroke_width: 0
+    stroke_width: defaultStrokeWidth
 
+  ## debug
+  
   #the rectangle border where the poker card should be guaranteed to not be cut (see poker-size.pdf)
   #not actually useful to be displayed unless debugging, but lots of other items are based off of where the safe edges are
   #rect layout: 'safe'
 
+  ## Creating Backgrounds
+  
   #this is the background color for the top ability
   rect layout: 'topAbilityColorBox'
-  #I think this just makes the bottom edge with the horizontal bar look a bit cleaner
+  #just makes the bottom edge with the horizontal bar look a bit cleaner (not rounded, unlike the top)
   rect layout: 'topAbilityColorBoxBorderCover'
   #this is the background color for the bottom ability
   rect layout: 'bottomAbilityColorBox'
@@ -185,7 +247,7 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
   #again, cleaning up the edges around a box
   rect layout: 'requirementsColorBoxBorderCover'
 
-  ## top ability stuff
+  ## Top Ability Elements
 
   #top ability has a few bubbles, summarizing ability data
   #this is the bubble (with a 1 pixel black border, or 'stroke', to stand out) for targets, and it has its own colors
@@ -314,25 +376,58 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
   #the specific number holds no meaning, we can later swap the order of cards if we need to, right now it's jus the order that it is in the .csv
   rect layout: 'cardNumberCircle'
   text str: data['ID'], layout: 'cardNumber'
+  
+  
+  
+  #uncomment this if you want to see how various angle values are treated
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#ffffff', angle: 0
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#eeeeee', angle: -1
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#dddddd', angle: -2
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#cccccc', angle: -2.1
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#bbbbbb', angle: -2.2
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#aaaaaa', angle: -2.3
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#999999', angle: -2.4
+  #rect x: 210, y: 200, height: 50, width: 200, fill_color: '#888888', angle: -2.5
+  #rect x: 215, y: 200, height: 50, width: 200, fill_color: '#777700', angle: -2.6
+  #rect x: 200, y: 200, height: 50, width: 200, fill_color: '#666666', angle: -2.7
+  #rect x: 220, y: 200, height: 50, width: 200, fill_color: '#555555', angle: 10
+  #rect x: 225, y: 200, height: 50, width: 200, fill_color: '#005555', angle: -2.55
+  
+  
 
   ## output file stuff
-
+  
+  #save each individual card: good for review and professional printing
   save_png prefix: 'ttcc_'
-  #save_pdf trim: 37.5
-  save_sheet sprue: 'letter_poker_card_custom.yml'
+  #save a sheet of cards all together: good for home printing
+  #save_sheet sprue: 'letter_poker_card_custom.yml'
 end
 
-#this is for creading the back of the card, right now a single image
-Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'charactercardlayout.yml')  do
+#this is for creading the back of the card
+#use the below for home printing
+#Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: 1, layout: 'charactercardlayout.yml')  do
+#use the following for professionial printing
+Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
-  rect layout: 'cut'
-  rect layout: 'backOfCards'
+  #keeping these for reconstructing in future, but it was easier/prettier to have a png include the bleed/cut stuff
+  #background color: 'white'
+  #rect layout: 'cut'
+  
+  #background. either a color, or an image
+  #if a value in a cell is only an integer then the comparison needs to be with #'s, otherwise it's a string compare
+  levelImage = data['Tier'].map {|tier|
+      tier == 2 ? "tier-2-back.png" : tier == 3 ? "tier-3-back.png" : "tier-1-back.png"
+    }
+  png file: levelImage
+    
   svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
   svg data: GameIcons.get('card-random').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'cardBack'
   svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
+  text str: "Tactile Tabletop", layout: 'companyLogo'
+  #rect layout: 'companyLogo'
+
   ## output file stuff
 
   save_png prefix: 'ttcc_BACK'

@@ -9,13 +9,13 @@
 
 #820 - 750 = 70 ; 70 /2 = 35
 fromLeftBleedToCut:
-  #x: 35
-  x: 0
+  x: 36
+  #x: 0
   
 #820 - 750 = 70 ; 70 /2 = 35
 fromTopBleedToCut:
-  #y: 35
-  y: 0
+  y: 36
+  #y: 0
   
 fromTopLeftBleedToCut:
   extends:
@@ -23,34 +23,36 @@ fromTopLeftBleedToCut:
    - fromTopBleedToCut
    
 # The "cut area line", everything outside of this area guaranteed to be lost
+#700 - (36*2) = 628
 cut:
   extends: fromTopLeftBleedToCut
-  width: 530
-  height: 530
+  width: 628
+  height: 628
   radius: 16
   fill_color: '#888'
+  stroke_width: 0
   
 # box for safe line
 
 fromLeftCutToSafe:
   extends: fromLeftBleedToCut
-  x: += 35
+  x: += 36
   
 fromTopCutToSafe:
   extends: fromTopBleedToCut
-  y: += 35
+  y: += 36
 
 fromTopLeftCutToSafe:
   extends: 
    - fromTopCutToSafe
    - fromLeftCutToSafe
    
-#total width (530) - 35 buffer on both sides (35*2=70) = 460
+#total width (628) - (36*2=72) = 556
 widthSafeArea:
-  width: 460
+  width: 556
   
 heightSafeArea:
-  height: 460
+  height: 556
   
 # the "safe area line", everything inside of this area guaranteed to be saved
 safe:
@@ -87,7 +89,7 @@ ArmorTitle:
    - fromTopLeftSafeToMargin
    - widthSafeArea
   align: center
-  font: 'Garamond 16'
+  font: 'Garamond 20'
   width: -= 40
   height: 70
   
@@ -95,14 +97,14 @@ titleUnderbar:
   extends: ArmorTitle
   height: 1
   width: -= 40
-  x: += 20
+  x: += 30
   y: += 100
 
 #height = total safe area height (460) - buffers from above and below (20*2=40) - height of title (70) - 20 buffer between title and text = 330
 ArmorAbility:
   extends: ArmorTitle
-  y: += 125
-  font: 'Garamond 12'
+  y: += 145
+  font: 'Garamond 16'
   height: 330
 
 
@@ -115,7 +117,8 @@ backOfCards:
 
 #x = total width (530) - buffers on both side (85*2=170) = 360
 emblemBack:
-  x: 85
-  y: 95
-  width: 360
-  height: 340
+  extends: fromTopLeftCutToSafe
+  x: += 20
+  y: += 40
+  width: 495
+  height: 475

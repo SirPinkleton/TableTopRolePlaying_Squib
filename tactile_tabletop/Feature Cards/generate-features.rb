@@ -7,11 +7,14 @@ data = Squib.csv file: 'Tactile Tabletop Data - Feature Cards.csv'
 
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf
-Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'featurecardlayout.yml')  do
+#use the below for home printing (no whitespace around cards, leading to fewer cuts)
+#Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Name'].size, layout: 'charactercardlayout.yml')  do
+#use the following for professionial printing (extra whitespace their machines are accounting for existing)
+Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Name'].size, layout: 'featurecardlayout.yml')  do
 
   ## overall card stuff
 
-  background color: 'white'
+  background color: :gold
   rect layout: 'cut'
   #rect layout: 'safe'
   rect layout: 'topAbilityColorBox'
@@ -90,11 +93,11 @@ Squib::Deck.new(dpi: 300, width: 750, height: 1050, cards: data['Top Ability Nam
   
   ## requirements stuff
   
-  rect layout: 'lineTopOfRequirements'
+  #rect layout: 'lineTopOfRequirements'
   #rect layout: 'requirementsTitle'
   #rect layout: 'requirementsBody'
-  text str: "Requirements", layout: 'requirementsTitle'
-  text str: data['Requirements'], layout: 'requirementsBody'
+  #text str: "Requirements", layout: 'requirementsTitle'
+  #text str: data['Requirements'], layout: 'requirementsBody'
   
   rect layout: 'cardNumberCircle'
   text str: data['ID'], layout: 'cardNumber'
