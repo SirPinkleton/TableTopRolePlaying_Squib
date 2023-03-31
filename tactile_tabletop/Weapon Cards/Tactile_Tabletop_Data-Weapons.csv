@@ -5,7 +5,7 @@ Reach Weapon,D6,D4,D6,10,1-hand,1-hand,"Can be thrown, losing the weapon but gra
 Great Weapon,D6,D4,D6,5,1-hand,1-hand,If you slay an enemy then increase next attack by 1d6
 Short Shot Weapon,D4,NA,D4,25,1-hand,NA,If you use two hands on this weapon then increase range by 10 ft and increase attack by 1d4
 Hand Castor,D4,NA,D4,20,1-hand,NA,If damage dealt with an attack then return a consumed contact token
-Short Weapon,D4,NA,D4,5,1-hand,NA,If an attack die rolls a 1 then reroll that die (once per attack roll)
+Short Weapon,D4,NA,D4,5,1-hand,NA,If an attack or defense die from this weapon rolls a 1 then reroll that die once
 Blocking Weapon,D2,NA,D8,5,1-hand,NA,If you successfully defend an attack then deal 1 damage to enemy
 Hand Weapon,D4,NA,D4,1,1-hand,NA,If attacking an enemy for a consecutive round then increase attack by 1 (cumulative)
 Unnarmed,D2,NA,D2,1,1-hand,NA,NA
