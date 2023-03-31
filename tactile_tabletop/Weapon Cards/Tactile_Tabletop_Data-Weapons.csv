@@ -1,6 +1,6 @@
 Weapon Name,Attack Die 1,Attack Die 2,Defense Die,Range,Requirement1,Requirement2,Extra Notes
-Long Shot Weapon,D4,NA,D4,60,1-hand,1-hand,If attacking an enemy beyond 30 feet then increase attack by 1d6
-Great Castor,D6,NA,D4,40,1-hand,1-hand,If attacking enemy with contact tokens then increase attack by 1 for each unique token type
+Long Shot Weapon,D6,NA,D4,60,1-hand,1-hand,If attacking an enemy beyond 25 feet then increase attack by 1d4
+Great Castor,D6,NA,D4,40,1-hand,1-hand,While attacking a Target you may remove a Contact Token from them to add 1d4 to your Attack Value.
 Reach Weapon,D6,D4,D6,10,1-hand,1-hand,"Can be thrown, losing the weapon but granting the buffs: Range becomes 25 and attack increases by 1d6"
 Great Weapon,D6,D4,D6,5,1-hand,1-hand,If you slay an enemy then increase next attack by 1d6
 Short Shot Weapon,D4,NA,D4,25,1-hand,NA,If you use two hands on this weapon then increase range by 10 ft and increase attack by 1d4
