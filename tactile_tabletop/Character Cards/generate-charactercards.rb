@@ -349,10 +349,16 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   #rect layout: 'requirementsBody'
   text str: "Requirements", layout: 'requirementsTitle'
 
-  #create empty array of the right size
+  #create empty arrays of the right size
   requirementsText = data['Perception Requirements'].map {|val| " "}
-  #create arrays of the same size, either empty or with the info for their stats specified
+  requirementsIcons = data['Perception Requirements'].map {|val| " "}
+  #create arrays of the same size, either empty or with the text info for their stats specified. the whitespace is for the icon
   perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s + " Per " : ""}
+  #create arrays of the same size, either empty or with the svg info for their stats specified
+  perceptionRequirementsImageBuffer = data['Perception Requirements'].map {|val| val > 0 ? 30 : 0}
+  perceptionRequirementsImage = data['Perception Requirements'].map {|val| val > 0 ? "perception.png" : "na.png"}
+  
+  #repeat for other stats
   vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s + " Vig " : ""}
   finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s + " Fin " : ""}
   knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s + " Kno " : ""}
@@ -370,7 +376,7 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
 
   #requirements are any number of stat requirements (needing 4 strength, or 2 perception and 2 knowledge, etc.)
   text str: requirementsText, layout: 'requirementsBody'
-
+  png file: perceptionRequirementsImage, layout: 'requirementsImage', x: += perceptionRequirementsImageBuffer
 
   #to keep track of cards in a tier, we create a circle and put in a number of its index from the .csv
   #the specific number holds no meaning, we can later swap the order of cards if we need to, right now it's jus the order that it is in the .csv

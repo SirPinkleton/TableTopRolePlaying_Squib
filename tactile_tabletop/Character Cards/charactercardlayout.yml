@@ -511,7 +511,10 @@ requirementsBody:
   width: 350
   align: center
 
-
+requirementsImage:
+  extends: 
+   - requirementsBody
+   - iconsWidthHeight
 
 cardNumber:
   extends: 
