@@ -29,6 +29,50 @@ end
 # same process of taking a 30 pixel border for the cut produces a Safe width of 690 (750 - (30*2) = 690) and height of 990 (1050 - (30*2) = 990)
 
 
+## requirements indexing
+#we need to be able to do conditional programming to build a list of requirements for each card. This has to be done outside of the Deck.new() call
+
+  #We can have multiple stats, and we can't predict the order that we'll see them
+  #also, we have graphics we'd like to use for each stat
+  #in order to marry icons with text, and not have a huge headache of buffer management, we hard code the different slots where requirements can go, and track when something is nonzero
+  
+  #for each stat record where it's nonzero
+  #example of one of these: [0,1,1,0,0...]
+  
+  nonZeroPerception = data['Perception Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroVigor = data['Vigor Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroFinesse = data['Finesse Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroKnowledge = data['Knowledge Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroStrength = data['Strength Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroSpirituality = data['Spirituality Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroCharisma = data['Charisma Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroCraftmanship = data['Craftmanship Requirements'].map {|val| val > 0 ? 1 : 0}
+  #create a zero'd out list of the right size for keeping a running total
+  #example: [0,0,0,0,0...]
+  recordOfWhereStatsGo = data['Perception Requirements'].map {|val| 0}
+  
+  #add the things we're going to write to the overall record
+  #example: if record of where stats go started as [1,1,3,1,0], and nonZeroPerception was [0,1,1,0,0], then this produces [1,2,4,1,0]
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x+y}
+  #using these new totals, make sure to only write the non-zero ones for the stat by doing a product
+  #example: using earlier example, [1,2,4,1,0] * [0,1,1,0,0] = [0,2,4,0,0]
+  perceptionWriteLocations = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x*y}
+  #repeat for following stats
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x+y}
+  vigorWriteLocations = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x+y}
+  finesseWriteLocations = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x+y}
+  knowledgeWriteLocations = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x+y}
+  strengthWriteLocations = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x+y}
+  spiritualityWriteLocations = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x+y}
+  charismaWriteLocations = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x+y}
+  craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
+
 
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf included in this directory
@@ -346,37 +390,80 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   rect layout: 'lineTopOfRequirements'
 
   #rect layout: 'requirementsTitle'
-  #rect layout: 'requirementsBody'
+  #rect layout: 'requirementsBody1'
   text str: "Requirements", layout: 'requirementsTitle'
 
-  #create empty arrays of the right size
-  requirementsText = data['Perception Requirements'].map {|val| " "}
-  requirementsIcons = data['Perception Requirements'].map {|val| " "}
-  #create arrays of the same size, either empty or with the text info for their stats specified. the whitespace is for the icon
-  perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s + " Per " : ""}
-  #create arrays of the same size, either empty or with the svg info for their stats specified
-  perceptionRequirementsImageBuffer = data['Perception Requirements'].map {|val| val > 0 ? 30 : 0}
-  perceptionRequirementsImage = data['Perception Requirements'].map {|val| val > 0 ? "perception.png" : "na.png"}
+ 
   
+
+  
+  #create arrays of the same size of the value (if 0 it'll be removed in the following step
+  perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  #figure out if this text should be placed or not by appending the number (0 = doesn't appear)
+  perceptionRequirementsTextLayout = perceptionWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  #print the text
+  text str: perceptionRequirementsText, layout: perceptionRequirementsTextLayout
+  
+  #icon to use for perception
+  perceptionRequirementsImage = "perception.svg"
+  #figure out if this image should be placed or not by appending the number (0 = doesn't appear)
+  perceptionRequirementsImageLayout = perceptionWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  #write the icon
+  svg file: perceptionRequirementsImage, layout: perceptionRequirementsImageLayout
+      
   #repeat for other stats
-  vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s + " Vig " : ""}
-  finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s + " Fin " : ""}
-  knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s + " Kno " : ""}
-  strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s + " Str " : ""}
-  spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s + " Spi " : ""}
-  charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s + " Cha " : ""}
-  craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s + " Cra " : ""}
+  vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s : ""}  
+  vigorRequirementsTextLayout = vigorWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: vigorRequirementsText, layout: vigorRequirementsTextLayout
+  vigorRequirementsImage = "vigor.svg"
+  vigorRequirementsImageLayout = vigorWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: vigorRequirementsImage, layout: vigorRequirementsImageLayout
+  
+  
+  finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  finesseRequirementsTextLayout = finesseWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: finesseRequirementsText, layout: finesseRequirementsTextLayout
+  finesseRequirementsImage = "finesse.svg"
+  finesseRequirementsImageLayout = finesseWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: finesseRequirementsImage, layout: finesseRequirementsImageLayout
+  
+  knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  knowledgeRequirementsTextLayout = knowledgeWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: knowledgeRequirementsText, layout: knowledgeRequirementsTextLayout
+  knowledgeRequirementsImage = "knowledge.svg"
+  knowledgeRequirementsImageLayout = knowledgeWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: knowledgeRequirementsImage, layout: knowledgeRequirementsImageLayout
+  
+  strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  strengthRequirementsTextLayout = strengthWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: strengthRequirementsText, layout: strengthRequirementsTextLayout
+  strengthRequirementsImage = "strength.svg"
+  strengthRequirementsImageLayout = strengthWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: strengthRequirementsImage, layout: strengthRequirementsImageLayout
+  
+  spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  spiritualityRequirementsTextLayout = spiritualityWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: spiritualityRequirementsText, layout: spiritualityRequirementsTextLayout
+  spiritualityRequirementsImage = "spirituality.svg"
+  spiritualityRequirementsImageLayout = spiritualityWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: spiritualityRequirementsImage, layout: spiritualityRequirementsImageLayout
+  
+  charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  charismaRequirementsTextLayout = charismaWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: charismaRequirementsText, layout: charismaRequirementsTextLayout
+  charismaRequirementsImage = "charisma.svg"
+  charismaRequirementsImageLayout = charismaWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: charismaRequirementsImage, layout: charismaRequirementsImageLayout
+  
+  craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  craftmanshipRequirementsTextLayout = craftmanshipWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: craftmanshipRequirementsText, layout: craftmanshipRequirementsTextLayout
+  craftmanshipRequirementsImage = "craftmanship.svg"
+  craftmanshipRequirementsImageLayout = craftmanshipWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: craftmanshipRequirementsImage, layout: craftmanshipRequirementsImageLayout
+  
 
-  #append all the strings together across the arrays
-  #zip the arrays together, so each entry becomes a sub array of all the text
-  requirementsText = requirementsText.zip(perceptionRequirementsText, vigorRequirementsText, finesseRequirementsText, knowledgeRequirementsText, strengthRequirementsText, spiritualityRequirementsText, charismaRequirementsText, craftmanshipRequirementsText)
-  #turn the sub arrays into singular strings
-  requirementsText = requirementsText.map {|subArray| subArray * ""}
 
-
-  #requirements are any number of stat requirements (needing 4 strength, or 2 perception and 2 knowledge, etc.)
-  text str: requirementsText, layout: 'requirementsBody'
-  png file: perceptionRequirementsImage, layout: 'requirementsImage', x: += perceptionRequirementsImageBuffer
 
   #to keep track of cards in a tier, we create a circle and put in a number of its index from the .csv
   #the specific number holds no meaning, we can later swap the order of cards if we need to, right now it's jus the order that it is in the .csv
