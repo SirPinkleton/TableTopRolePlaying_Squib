@@ -504,26 +504,102 @@ requirementsTitle:
   align: left
   font: 'Garamond 7.5'
 
-#depends on the card, usually N/A, otherwise Stat #
-requirementsBody:
-  extends: requirementsTitle
-  x: += 210
-  width: 350
-  align: center
+#We can have multiple stats, and which stat we have isn't following any consistent order
+#also, we have graphics we'd like to use for each stat type.
+#in order to marry icons with text, and not have a huge headache of buffer management, we hard code the different slots where requirements can go
 
+#depends on the card if this is present, and what value it is
+requirementsBody0:
+   x: 1
+   y: 1
+   width: 1
+   height: 1
+
+requirementsBody1:
+  extends: requirementsTitle
+  x: += 200
+  width: 80
+
+requirementsBody2:
+  extends: requirementsBody1
+  x: += 85
+  
+requirementsBody3:
+  extends: requirementsBody2
+  x: += 85
+  
+requirementsBody4:
+  extends: requirementsBody3
+  x: += 85
+  
+
+  
+#assuming there are # of stats, an icon is to be paired with it. this controls the width/height/etc.
+requirementsImage0:
+   x: 1
+   y: 1
+   width: 1
+   height: 1
+
+requirementsImage1:
+  extends: 
+   - requirementsBody1
+   - requirementsIconsWidthHeight
+  x: += 20
+   
+requirementsImage2:
+  extends: requirementsImage1
+  x: += 85
+   
+requirementsImage3:
+  extends: requirementsImage2
+  x: += 85
+   
+requirementsImage4:
+  extends: requirementsImage3
+  x: += 85
+  
+  
+#similar to the above, but for the side bar
+barImage0:
+   x: 1
+   y: 1
+   width: 1
+   height: 1
+
+barImage1:
+  extends: 
+   - fromTopLeftCutToSafe
+   - barIconsWidthHeight
+  x: -= 27
+  y: += 25
+  fill_color: '#fff'
+   
+barImage2:
+  extends: barImage1
+  y: += 85
+   
+barImage3:
+  extends: barImage2
+  y: += 85
+   
+barImage4:
+  extends: barImage3
+  y: += 85
+   
 
 
 cardNumber:
   extends: 
-   - requirementsBody
-  x: += 100
-  align: right
+   - requirementsBody4
+  x: += 115
+  #align: right
   font: 'Garamond 7.5'
 
 cardNumberCircle:
   extends: 
    - cardNumber
-  x: += 305
+  x: -= 15
   #align: right
   width: 54
   height: 34
@@ -537,6 +613,13 @@ iconsWidthHeight:
   width: 75
   height: 75
 
+requirementsIconsWidthHeight:
+  width: 40
+  height: 40
+  
+barIconsWidthHeight:
+  width: 25
+  height: 25
 
 ## back of card
 

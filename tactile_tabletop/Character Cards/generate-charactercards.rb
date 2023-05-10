@@ -29,6 +29,60 @@ end
 # same process of taking a 30 pixel border for the cut produces a Safe width of 690 (750 - (30*2) = 690) and height of 990 (1050 - (30*2) = 990)
 
 
+## requirements indexing
+#we need to be able to do conditional programming to build a list of requirements for each card. This has to be done outside of the Deck.new() call
+
+  #We can have multiple stats, and we can't predict the order that we'll see them
+  #also, we have graphics we'd like to use for each stat
+  #in order to marry icons with text, and not have a huge headache of buffer management, we hard code the different slots where requirements can go, and track when something is nonzero
+  
+  #for each stat record where it's nonzero
+  #example of one of these: [0,1,1,0,0...]
+  
+  nonZeroPerception = data['Perception Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroVigor = data['Vigor Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroFinesse = data['Finesse Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroKnowledge = data['Knowledge Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroStrength = data['Strength Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroSpirituality = data['Spirituality Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroCharisma = data['Charisma Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroCraftmanship = data['Craftmanship Requirements'].map {|val| val > 0 ? 1 : 0}
+  #create a zero'd out list of the right size for keeping a running total
+  #example: [0,0,0,0,0...]
+  recordOfWhereStatsGo = data['Perception Requirements'].map {|val| 0}
+  
+  #add the things we're going to write to the overall record
+  #example: if record of where stats go started as [1,1,3,1,0], and nonZeroPerception was [0,1,1,0,0], then this produces [1,2,4,1,0]
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x+y}
+  #using these new totals, make sure to only write the non-zero ones for the stat by doing a product
+  #example: using earlier example, [1,2,4,1,0] * [0,1,1,0,0] = [0,2,4,0,0]
+  perceptionWriteLocations = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x*y}
+  #repeat for following stats
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x+y}
+  vigorWriteLocations = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x+y}
+  finesseWriteLocations = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x+y}
+  knowledgeWriteLocations = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x+y}
+  strengthWriteLocations = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x+y}
+  spiritualityWriteLocations = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x+y}
+  charismaWriteLocations = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x+y}
+  craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
+  
+  #icons for the requirements
+  perceptionRequirementsImage = "perception.svg"
+  vigorRequirementsImage = "vigor.svg"
+  finesseRequirementsImage = "finesse.svg"
+  knowledgeRequirementsImage = "knowledge.svg"
+  strengthRequirementsImage = "strength.svg"
+  spiritualityRequirementsImage = "spirituality.svg"
+  charismaRequirementsImage = "charisma.svg"
+  craftmanshipRequirementsImage = "craftmanship.svg"
+
 
 
 #width/height/dpi measurements provided by template from BoardGameMaker.com, see poker-size.pdf included in this directory
@@ -68,12 +122,15 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   defaultwidth = 2000
   #we want these bars to be otherwise not too high, so that we can stack multiple together. we also want to grow them downwards, so they should be negative
   #-40 was found with yet more tweaking and trying out values
-  defaultHeight = -40
+  defaultHeight = -55
   #usually don't want the stroke, the fill_color is sufficient
   defaultStrokeWidth = 0
   #this controls how high or low the bar starts. with this angle, x value, and width, 720 looks good: the right-middle and top left of the card get covered by the first bar, and it grows downward from there
   #also, create it as an array of values aligning with the number of cards for math tricks later
   baseYOffset = data['Perception Requirements'].map {|c| 720}
+  #icons also need to be placed along the bar and have a spacing
+  baseIconsYOffsets = data['Perception Requirements'].map {|c| 100}
+  iconDefaultDistanceApart = 55
   
   # colors of the bars. aligns with the colors in the user manual, but could be anything really
   perceptionBorderColor = '#00ffff'
@@ -103,6 +160,12 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     angle: defaultAngle,
     fill_color: perceptionBorderColor,
     stroke_width: defaultStrokeWidth
+    
+  #create svg also
+  perceptionIconYOffsets = baseIconsYOffsets
+  perceptionBarImageLayout = perceptionWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: perceptionRequirementsImage, layout: perceptionBarImageLayout, y: perceptionIconYOffsets
+
 
   ## Creating Vigor bars
   
@@ -129,6 +192,14 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     angle: defaultAngle,
     fill_color: vigorBorderColor,
     stroke_width: defaultStrokeWidth
+  
+  #need to move the vigor icon down x * 20 pixels below the perception icon (assuming it exists)
+  #first, figure out what the perception offsets for each card are  
+  offsetsFromPerceptionIcons = data['Perception Requirements'].map {|value| value * iconDefaultDistanceApart}
+  #vigor icon locations are the previous icons location + the offsets calculated above
+  vigorIconYOffsets = perceptionIconYOffsets.zip(offsetsFromPerceptionIcons).map {|subArray| subArray.sum}
+  vigorBarImageLayout = vigorWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: vigorRequirementsImage, layout: vigorBarImageLayout, y: vigorIconYOffsets
 
   ## Creating Finesse bars
   
@@ -146,6 +217,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: finesseBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromVigorIcons = data['Vigor Requirements'].map {|value| value * iconDefaultDistanceApart}
+  finesseIconYOffsets = vigorIconYOffsets.zip(offsetsFromVigorIcons).map {|subArray| subArray.sum}
+  finesseBarImageLayout = finesseWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: finesseRequirementsImage, layout: finesseBarImageLayout, y: finesseIconYOffsets
+  
   ## Creating Knowledge bars
   
   #same as the above, but for knowledge
@@ -162,6 +238,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: knowledgeBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromFinesseIcons = data['Finesse Requirements'].map {|value| value * iconDefaultDistanceApart}
+  knowledgeIconYOffsets = finesseIconYOffsets.zip(offsetsFromFinesseIcons).map {|subArray| subArray.sum}
+  knowledgeBarImageLayout = knowledgeWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: knowledgeRequirementsImage, layout: knowledgeBarImageLayout, y: knowledgeIconYOffsets
+  
   ## Creating Strength bars
   
   #same as the above, but for strength
@@ -178,6 +259,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: strengthBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromKnowledgeIcons = data['Knowledge Requirements'].map {|value| value * iconDefaultDistanceApart}
+  strengthIconYOffsets = knowledgeIconYOffsets.zip(offsetsFromKnowledgeIcons).map {|subArray| subArray.sum}
+  strengthBarImageLayout = strengthWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: strengthRequirementsImage, layout: strengthBarImageLayout, y: strengthIconYOffsets
+  
   ## Creating Spirituality bars
   
   #same as the above, but for spirituality
@@ -194,6 +280,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: spiritualityBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromStrengthIcons = data['Strength Requirements'].map {|value| value * iconDefaultDistanceApart}
+  spiritualityIconYOffsets = strengthIconYOffsets.zip(offsetsFromStrengthIcons).map {|subArray| subArray.sum}
+  spiritualityBarImageLayout = spiritualityWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: spiritualityRequirementsImage, layout: spiritualityBarImageLayout, y: spiritualityIconYOffsets
+  
   ## Creating Charisma bars
   
   #same as the above, but for charisma
@@ -210,6 +301,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: charismaBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromSpiritualityIcons = data['Spirituality Requirements'].map {|value| value * iconDefaultDistanceApart}
+  charismaIconYOffsets = spiritualityIconYOffsets.zip(offsetsFromSpiritualityIcons).map {|subArray| subArray.sum}
+  charismaBarImageLayout = charismaWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: charismaRequirementsImage, layout: charismaBarImageLayout, y: charismaIconYOffsets
+  
   ## Creating Craftmanship bars
   
   #same as the above, but for craftmanship
@@ -226,6 +322,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: craftmanshipBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromCharismaIcons = data['Charisma Requirements'].map {|value| value * iconDefaultDistanceApart}
+  craftmanshipIconYOffsets = charismaIconYOffsets.zip(offsetsFromCharismaIcons).map {|subArray| subArray.sum}
+  craftmanshipBarImageLayout = craftmanshipWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: craftmanshipRequirementsImage, layout: craftmanshipBarImageLayout, y: craftmanshipIconYOffsets
+  
   ## debug
   
   #the rectangle border where the poker card should be guaranteed to not be cut (see poker-size.pdf)
@@ -346,31 +447,70 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   rect layout: 'lineTopOfRequirements'
 
   #rect layout: 'requirementsTitle'
-  #rect layout: 'requirementsBody'
+  #rect layout: 'requirementsBody1'
   text str: "Requirements", layout: 'requirementsTitle'
 
-  #create empty array of the right size
-  requirementsText = data['Perception Requirements'].map {|val| " "}
-  #create arrays of the same size, either empty or with the info for their stats specified
-  perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s + " Per " : ""}
-  vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s + " Vig " : ""}
-  finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s + " Fin " : ""}
-  knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s + " Kno " : ""}
-  strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s + " Str " : ""}
-  spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s + " Spi " : ""}
-  charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s + " Cha " : ""}
-  craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s + " Cra " : ""}
+ 
+  
 
-  #append all the strings together across the arrays
-  #zip the arrays together, so each entry becomes a sub array of all the text
-  requirementsText = requirementsText.zip(perceptionRequirementsText, vigorRequirementsText, finesseRequirementsText, knowledgeRequirementsText, strengthRequirementsText, spiritualityRequirementsText, charismaRequirementsText, craftmanshipRequirementsText)
-  #turn the sub arrays into singular strings
-  requirementsText = requirementsText.map {|subArray| subArray * ""}
-
-
-  #requirements are any number of stat requirements (needing 4 strength, or 2 perception and 2 knowledge, etc.)
-  text str: requirementsText, layout: 'requirementsBody'
-
+  
+  #create arrays of the same size of the value (if 0 it'll be removed in the following step
+  perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  #figure out if this text should be placed or not by appending the number (0 = doesn't appear)
+  perceptionRequirementsTextLayout = perceptionWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  #print the text
+  text str: perceptionRequirementsText, layout: perceptionRequirementsTextLayout
+  
+  #icon to use for perception
+  #figure out if this image should be placed or not by appending the number (0 = doesn't appear)
+  perceptionRequirementsImageLayout = perceptionWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  #write the icon
+  svg file: perceptionRequirementsImage, layout: perceptionRequirementsImageLayout
+      
+  #repeat for other stats
+  vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s : ""}  
+  vigorRequirementsTextLayout = vigorWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: vigorRequirementsText, layout: vigorRequirementsTextLayout
+  vigorRequirementsImageLayout = vigorWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: vigorRequirementsImage, layout: vigorRequirementsImageLayout
+  
+  
+  finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  finesseRequirementsTextLayout = finesseWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: finesseRequirementsText, layout: finesseRequirementsTextLayout
+  finesseRequirementsImageLayout = finesseWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: finesseRequirementsImage, layout: finesseRequirementsImageLayout
+  
+  knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  knowledgeRequirementsTextLayout = knowledgeWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: knowledgeRequirementsText, layout: knowledgeRequirementsTextLayout
+  knowledgeRequirementsImageLayout = knowledgeWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: knowledgeRequirementsImage, layout: knowledgeRequirementsImageLayout
+  
+  strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  strengthRequirementsTextLayout = strengthWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: strengthRequirementsText, layout: strengthRequirementsTextLayout
+  strengthRequirementsImageLayout = strengthWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: strengthRequirementsImage, layout: strengthRequirementsImageLayout
+  
+  spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  spiritualityRequirementsTextLayout = spiritualityWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: spiritualityRequirementsText, layout: spiritualityRequirementsTextLayout
+  spiritualityRequirementsImageLayout = spiritualityWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: spiritualityRequirementsImage, layout: spiritualityRequirementsImageLayout
+  
+  charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  charismaRequirementsTextLayout = charismaWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: charismaRequirementsText, layout: charismaRequirementsTextLayout
+  charismaRequirementsImageLayout = charismaWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: charismaRequirementsImage, layout: charismaRequirementsImageLayout
+  
+  craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  craftmanshipRequirementsTextLayout = craftmanshipWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: craftmanshipRequirementsText, layout: craftmanshipRequirementsTextLayout
+  craftmanshipRequirementsImageLayout = craftmanshipWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: craftmanshipRequirementsImage, layout: craftmanshipRequirementsImageLayout
+  
 
   #to keep track of cards in a tier, we create a circle and put in a number of its index from the .csv
   #the specific number holds no meaning, we can later swap the order of cards if we need to, right now it's jus the order that it is in the .csv
