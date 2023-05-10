@@ -558,6 +558,34 @@ requirementsImage3:
 requirementsImage4:
   extends: requirementsImage3
   x: += 85
+  
+  
+#similar to the above, but for the side bar
+barImage0:
+   x: 1
+   y: 1
+   width: 1
+   height: 1
+
+barImage1:
+  extends: 
+   - fromTopLeftCutToSafe
+   - barIconsWidthHeight
+  x: -= 27
+  y: += 25
+  fill_color: '#fff'
+   
+barImage2:
+  extends: barImage1
+  y: += 85
+   
+barImage3:
+  extends: barImage2
+  y: += 85
+   
+barImage4:
+  extends: barImage3
+  y: += 85
    
 
 
@@ -588,6 +616,10 @@ iconsWidthHeight:
 requirementsIconsWidthHeight:
   width: 40
   height: 40
+  
+barIconsWidthHeight:
+  width: 25
+  height: 25
 
 ## back of card
 
