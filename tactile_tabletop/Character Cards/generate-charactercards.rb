@@ -72,6 +72,16 @@ end
   charismaWriteLocations = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x*y}
   recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x+y}
   craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
+  
+  #icons for the requirements
+  perceptionRequirementsImage = "perception.svg"
+  vigorRequirementsImage = "vigor.svg"
+  finesseRequirementsImage = "finesse.svg"
+  knowledgeRequirementsImage = "knowledge.svg"
+  strengthRequirementsImage = "strength.svg"
+  spiritualityRequirementsImage = "spirituality.svg"
+  charismaRequirementsImage = "charisma.svg"
+  craftmanshipRequirementsImage = "craftmanship.svg"
 
 
 
@@ -112,12 +122,15 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   defaultwidth = 2000
   #we want these bars to be otherwise not too high, so that we can stack multiple together. we also want to grow them downwards, so they should be negative
   #-40 was found with yet more tweaking and trying out values
-  defaultHeight = -40
+  defaultHeight = -55
   #usually don't want the stroke, the fill_color is sufficient
   defaultStrokeWidth = 0
   #this controls how high or low the bar starts. with this angle, x value, and width, 720 looks good: the right-middle and top left of the card get covered by the first bar, and it grows downward from there
   #also, create it as an array of values aligning with the number of cards for math tricks later
   baseYOffset = data['Perception Requirements'].map {|c| 720}
+  #icons also need to be placed along the bar and have a spacing
+  baseIconsYOffsets = data['Perception Requirements'].map {|c| 100}
+  iconDefaultDistanceApart = 55
   
   # colors of the bars. aligns with the colors in the user manual, but could be anything really
   perceptionBorderColor = '#00ffff'
@@ -147,6 +160,12 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     angle: defaultAngle,
     fill_color: perceptionBorderColor,
     stroke_width: defaultStrokeWidth
+    
+  #create svg also
+  perceptionIconYOffsets = baseIconsYOffsets
+  perceptionBarImageLayout = perceptionWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: perceptionRequirementsImage, layout: perceptionBarImageLayout, y: perceptionIconYOffsets
+
 
   ## Creating Vigor bars
   
@@ -173,6 +192,14 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     angle: defaultAngle,
     fill_color: vigorBorderColor,
     stroke_width: defaultStrokeWidth
+  
+  #need to move the vigor icon down x * 20 pixels below the perception icon (assuming it exists)
+  #first, figure out what the perception offsets for each card are  
+  offsetsFromPerceptionIcons = data['Perception Requirements'].map {|value| value * iconDefaultDistanceApart}
+  #vigor icon locations are the previous icons location + the offsets calculated above
+  vigorIconYOffsets = perceptionIconYOffsets.zip(offsetsFromPerceptionIcons).map {|subArray| subArray.sum}
+  vigorBarImageLayout = vigorWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: vigorRequirementsImage, layout: vigorBarImageLayout, y: vigorIconYOffsets
 
   ## Creating Finesse bars
   
@@ -190,6 +217,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: finesseBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromVigorIcons = data['Vigor Requirements'].map {|value| value * iconDefaultDistanceApart}
+  finesseIconYOffsets = vigorIconYOffsets.zip(offsetsFromVigorIcons).map {|subArray| subArray.sum}
+  finesseBarImageLayout = finesseWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: finesseRequirementsImage, layout: finesseBarImageLayout, y: finesseIconYOffsets
+  
   ## Creating Knowledge bars
   
   #same as the above, but for knowledge
@@ -206,6 +238,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: knowledgeBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromFinesseIcons = data['Finesse Requirements'].map {|value| value * iconDefaultDistanceApart}
+  knowledgeIconYOffsets = finesseIconYOffsets.zip(offsetsFromFinesseIcons).map {|subArray| subArray.sum}
+  knowledgeBarImageLayout = knowledgeWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: knowledgeRequirementsImage, layout: knowledgeBarImageLayout, y: knowledgeIconYOffsets
+  
   ## Creating Strength bars
   
   #same as the above, but for strength
@@ -222,6 +259,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: strengthBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromKnowledgeIcons = data['Knowledge Requirements'].map {|value| value * iconDefaultDistanceApart}
+  strengthIconYOffsets = knowledgeIconYOffsets.zip(offsetsFromKnowledgeIcons).map {|subArray| subArray.sum}
+  strengthBarImageLayout = strengthWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: strengthRequirementsImage, layout: strengthBarImageLayout, y: strengthIconYOffsets
+  
   ## Creating Spirituality bars
   
   #same as the above, but for spirituality
@@ -238,6 +280,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: spiritualityBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromStrengthIcons = data['Strength Requirements'].map {|value| value * iconDefaultDistanceApart}
+  spiritualityIconYOffsets = strengthIconYOffsets.zip(offsetsFromStrengthIcons).map {|subArray| subArray.sum}
+  spiritualityBarImageLayout = spiritualityWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: spiritualityRequirementsImage, layout: spiritualityBarImageLayout, y: spiritualityIconYOffsets
+  
   ## Creating Charisma bars
   
   #same as the above, but for charisma
@@ -254,6 +301,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: charismaBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromSpiritualityIcons = data['Spirituality Requirements'].map {|value| value * iconDefaultDistanceApart}
+  charismaIconYOffsets = spiritualityIconYOffsets.zip(offsetsFromSpiritualityIcons).map {|subArray| subArray.sum}
+  charismaBarImageLayout = charismaWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: charismaRequirementsImage, layout: charismaBarImageLayout, y: charismaIconYOffsets
+  
   ## Creating Craftmanship bars
   
   #same as the above, but for craftmanship
@@ -270,6 +322,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: craftmanshipBorderColor,
     stroke_width: defaultStrokeWidth
 
+  offsetsFromCharismaIcons = data['Charisma Requirements'].map {|value| value * iconDefaultDistanceApart}
+  craftmanshipIconYOffsets = charismaIconYOffsets.zip(offsetsFromCharismaIcons).map {|subArray| subArray.sum}
+  craftmanshipBarImageLayout = craftmanshipWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: craftmanshipRequirementsImage, layout: craftmanshipBarImageLayout, y: craftmanshipIconYOffsets
+  
   ## debug
   
   #the rectangle border where the poker card should be guaranteed to not be cut (see poker-size.pdf)
@@ -405,7 +462,6 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   text str: perceptionRequirementsText, layout: perceptionRequirementsTextLayout
   
   #icon to use for perception
-  perceptionRequirementsImage = "perception.svg"
   #figure out if this image should be placed or not by appending the number (0 = doesn't appear)
   perceptionRequirementsImageLayout = perceptionWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   #write the icon
@@ -415,7 +471,6 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s : ""}  
   vigorRequirementsTextLayout = vigorWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: vigorRequirementsText, layout: vigorRequirementsTextLayout
-  vigorRequirementsImage = "vigor.svg"
   vigorRequirementsImageLayout = vigorWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: vigorRequirementsImage, layout: vigorRequirementsImageLayout
   
@@ -423,47 +478,39 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s : ""}
   finesseRequirementsTextLayout = finesseWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: finesseRequirementsText, layout: finesseRequirementsTextLayout
-  finesseRequirementsImage = "finesse.svg"
   finesseRequirementsImageLayout = finesseWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: finesseRequirementsImage, layout: finesseRequirementsImageLayout
   
   knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s : ""}
   knowledgeRequirementsTextLayout = knowledgeWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: knowledgeRequirementsText, layout: knowledgeRequirementsTextLayout
-  knowledgeRequirementsImage = "knowledge.svg"
   knowledgeRequirementsImageLayout = knowledgeWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: knowledgeRequirementsImage, layout: knowledgeRequirementsImageLayout
   
   strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s : ""}
   strengthRequirementsTextLayout = strengthWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: strengthRequirementsText, layout: strengthRequirementsTextLayout
-  strengthRequirementsImage = "strength.svg"
   strengthRequirementsImageLayout = strengthWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: strengthRequirementsImage, layout: strengthRequirementsImageLayout
   
   spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s : ""}
   spiritualityRequirementsTextLayout = spiritualityWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: spiritualityRequirementsText, layout: spiritualityRequirementsTextLayout
-  spiritualityRequirementsImage = "spirituality.svg"
   spiritualityRequirementsImageLayout = spiritualityWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: spiritualityRequirementsImage, layout: spiritualityRequirementsImageLayout
   
   charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s : ""}
   charismaRequirementsTextLayout = charismaWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: charismaRequirementsText, layout: charismaRequirementsTextLayout
-  charismaRequirementsImage = "charisma.svg"
   charismaRequirementsImageLayout = charismaWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: charismaRequirementsImage, layout: charismaRequirementsImageLayout
   
   craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s : ""}
   craftmanshipRequirementsTextLayout = craftmanshipWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   text str: craftmanshipRequirementsText, layout: craftmanshipRequirementsTextLayout
-  craftmanshipRequirementsImage = "craftmanship.svg"
   craftmanshipRequirementsImageLayout = craftmanshipWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: craftmanshipRequirementsImage, layout: craftmanshipRequirementsImageLayout
   
-
-
 
   #to keep track of cards in a tier, we create a circle and put in a number of its index from the .csv
   #the specific number holds no meaning, we can later swap the order of cards if we need to, right now it's jus the order that it is in the .csv
