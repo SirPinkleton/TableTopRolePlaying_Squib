@@ -74,14 +74,14 @@ end
   craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
   
   #icons for the requirements
-  perceptionRequirementsImage = "perception.svg"
-  vigorRequirementsImage = "vigor.svg"
-  finesseRequirementsImage = "finesse.svg"
-  knowledgeRequirementsImage = "knowledge.svg"
-  strengthRequirementsImage = "strength.svg"
-  spiritualityRequirementsImage = "spirituality.svg"
-  charismaRequirementsImage = "charisma.svg"
-  craftmanshipRequirementsImage = "craftmanship.svg"
+  perceptionRequirementsImage = "..\\Assets\\primary-skill-needed-icon.svg"
+  vigorRequirementsImage = "..\\Assets\\secondary-skill-needed-icon.svg"
+  finesseRequirementsImage = "..\\Assets\\tertiary-skill-needed-icon.svg"
+  knowledgeRequirementsImage = "..\\Assets\\quaternary-skill-needed-icon.svg"
+  strengthRequirementsImage = "..\\Assets\\quinary-skill-needed-icon.svg"
+  spiritualityRequirementsImage = "..\\Assets\\senary-skill-needed-icon.svg"
+  charismaRequirementsImage = "..\\Assets\\septenary-skill-needed-icon.svg"
+  craftmanshipRequirementsImage = "..\\Assets\\octonary-skill-needed-icon.svg"
 
 
 
