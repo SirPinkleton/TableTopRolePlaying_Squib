@@ -39,9 +39,9 @@ end
   #for each stat record where it's nonzero
   #example of one of these: [0,1,1,0,0...]
   
-  nonZeroPerception = data['Perception Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroVigor = data['Vigor Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroFinesse = data['Finesse Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroPrimary = data['Primary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroSecondary = data['Secondary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroTertiary = data['Tertiary Requirements'].map {|val| val > 0 ? 1 : 0}
   nonZeroKnowledge = data['Knowledge Requirements'].map {|val| val > 0 ? 1 : 0}
   nonZeroStrength = data['Strength Requirements'].map {|val| val > 0 ? 1 : 0}
   nonZeroSpirituality = data['Spirituality Requirements'].map {|val| val > 0 ? 1 : 0}
@@ -49,19 +49,19 @@ end
   nonZeroCraftmanship = data['Craftmanship Requirements'].map {|val| val > 0 ? 1 : 0}
   #create a zero'd out list of the right size for keeping a running total
   #example: [0,0,0,0,0...]
-  recordOfWhereStatsGo = data['Perception Requirements'].map {|val| 0}
+  recordOfWhereStatsGo = data['Primary Requirements'].map {|val| 0}
   
   #add the things we're going to write to the overall record
-  #example: if record of where stats go started as [1,1,3,1,0], and nonZeroPerception was [0,1,1,0,0], then this produces [1,2,4,1,0]
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x+y}
+  #example: if record of where stats go started as [1,1,3,1,0], and nonZeroPrimary was [0,1,1,0,0], then this produces [1,2,4,1,0]
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroPrimary).map{|x,y| x+y}
   #using these new totals, make sure to only write the non-zero ones for the stat by doing a product
   #example: using earlier example, [1,2,4,1,0] * [0,1,1,0,0] = [0,2,4,0,0]
-  perceptionWriteLocations = recordOfWhereStatsGo.zip(nonZeroPerception).map{|x,y| x*y}
+  primaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroPrimary).map{|x,y| x*y}
   #repeat for following stats
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x+y}
-  vigorWriteLocations = recordOfWhereStatsGo.zip(nonZeroVigor).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x+y}
-  finesseWriteLocations = recordOfWhereStatsGo.zip(nonZeroFinesse).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSecondary).map{|x,y| x+y}
+  secondaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroSecondary).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroTertiary).map{|x,y| x+y}
+  tertiaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroTertiary).map{|x,y| x*y}
   recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x+y}
   knowledgeWriteLocations = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x*y}
   recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x+y}
@@ -74,9 +74,9 @@ end
   craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
   
   #icons for the requirements
-  perceptionRequirementsImage = "..\\Svg Files\\Stat Requirements\\primary-skill-needed-icon.svg"
-  vigorRequirementsImage = "..\\Svg Files\\Stat Requirements\\secondary-skill-needed-icon.svg"
-  finesseRequirementsImage = "..\\Svg Files\\Stat Requirements\\tertiary-skill-needed-icon.svg"
+  primaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\primary-skill-needed-icon.svg"
+  secondaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\secondary-skill-needed-icon.svg"
+  tertiaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\tertiary-skill-needed-icon.svg"
   knowledgeRequirementsImage = "..\\Svg Files\\Stat Requirements\\quaternary-skill-needed-icon.svg"
   strengthRequirementsImage = "..\\Svg Files\\Stat Requirements\\quinary-skill-needed-icon.svg"
   spiritualityRequirementsImage = "..\\Svg Files\\Stat Requirements\\senary-skill-needed-icon.svg"
@@ -133,15 +133,15 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   defaultStrokeWidth = 0
   #this controls how high or low the bar starts. with this angle, x value, and width, 720 looks good: the right-middle and top left of the card get covered by the first bar, and it grows downward from there
   #also, create it as an array of values aligning with the number of cards for math tricks later
-  baseYOffset = data['Perception Requirements'].map {|c| 720}
+  baseYOffset = data['Primary Requirements'].map {|c| 720}
   #icons also need to be placed along the bar and have a spacing
-  baseIconsYOffsets = data['Perception Requirements'].map {|c| 100}
+  baseIconsYOffsets = data['Primary Requirements'].map {|c| 100}
   iconDefaultDistanceApart = 55
   
   # colors of the bars. aligns with the colors in the user manual, but could be anything really
-  perceptionBorderColor = '#00ffff'
-  vigorBorderColor = '#008000'
-  finesseBorderColor = '#ffc0cb'
+  primaryBorderColor = '#00ffff'
+  secondaryBorderColor = '#008000'
+  tertiaryBorderColor = '#ffc0cb'
   knowledgeBorderColor = '#0000ff'
   strengthBorderColor = '#ff0000'
   spiritualityBorderColor = '#800080'
@@ -149,93 +149,93 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   craftmanshipBorderColor = '#ffffff'
 
 
-  ## Creating Perception bars
+  ## Creating Primary bars
 
-  #if this card has no perception, then height offset to use is 0
+  #if this card has no primary, then height offset to use is 0
   #this would mean the bar is not visible (height of 0) and the following bar wouldn't be moved down at all (yoffset of 0)
-  #otherwise, this Perception bar is a multiple of defaultHeight from what it is
-  perceptionToHeightMapping = data['Perception Requirements'].map {|value| value * defaultHeight}
+  #otherwise, this Primary bar is a multiple of defaultHeight from what it is
+  primaryToHeightMapping = data['Primary Requirements'].map {|value| value * defaultHeight}
 
-  #since perception is the first stat line, set its offsets = base
-  perceptionYOffsets = baseYOffset
-  #create first stat line, based off of what the perception stat requirement for the card is
+  #since primary is the first stat line, set its offsets = base
+  primaryYOffsets = baseYOffset
+  #create first stat line, based off of what the primary stat requirement for the card is
   rect x: defaultXOffset,
-    y: perceptionYOffsets,
+    y: primaryYOffsets,
     width: defaultwidth,
-    height: perceptionToHeightMapping,
+    height: primaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: perceptionBorderColor,
+    fill_color: primaryBorderColor,
     stroke_width: defaultStrokeWidth
     
   #create svg also
-  perceptionIconYOffsets = baseIconsYOffsets
-  perceptionBarImageLayout = perceptionWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: perceptionRequirementsImage, layout: perceptionBarImageLayout, y: perceptionIconYOffsets
+  primaryIconYOffsets = baseIconsYOffsets
+  primaryBarImageLayout = primaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: primaryRequirementsImage, layout: primaryBarImageLayout, y: primaryIconYOffsets
 
 
-  ## Creating Vigor bars
+  ## Creating Secondary bars
   
   #like before, we need to figure out how big this stat bar is
-  vigorToHeightMapping = data['Vigor Requirements'].map {|value| value * defaultHeight}
+  secondaryToHeightMapping = data['Secondary Requirements'].map {|value| value * defaultHeight}
 
   #before, we were making the first bar. its y offset was effective 0 (base, unmodified)
-  #it's possible this card has both a perception and vigor requirement. This means this vigor card should have an increase y offset
-  #which is based off of the heights of the previous bar, perception (so we don't overlap bars)
-  #first, the height mappings for the perception bars need to be positive for the formatting to work,
-  perceptionHeightsPositive = perceptionToHeightMapping.map {|element| element*=-1;element}
+  #it's possible this card has both a primary and secondary requirement. This means this secondary card should have an increase y offset
+  #which is based off of the heights of the previous bar, primary (so we don't overlap bars)
+  #first, the height mappings for the primary bars need to be positive for the formatting to work,
+  primaryHeightsPositive = primaryToHeightMapping.map {|element| element*=-1;element}
   #now we need to add these height mappings onto the base
   #we can add these first with a .zip operation, this creates sub arrays with the two arrays value's placed side by side
   #ie: if the base is [570,570,570] and p y offsets are [0,0,30] then a zipped array would look like [ [570,0], [570,0], [570,30] ]
-  totalPerceptionOffsetArrays = perceptionYOffsets.zip(perceptionHeightsPositive)
+  totalPrimaryOffsetArrays = primaryYOffsets.zip(primaryHeightsPositive)
   #now we just need a new array where each of these sub arrays are summed together, to get the cumulative offsets for each card
   #ie: taking from the above example, we want the result [570,570,600]
-  vigorYOffsets = totalPerceptionOffsetArrays.map {|subArray| subArray.sum}
-  #create the vigor stat bar
+  secondaryYOffsets = totalPrimaryOffsetArrays.map {|subArray| subArray.sum}
+  #create the secondary stat bar
   rect x: defaultXOffset,
-    y: vigorYOffsets,
+    y: secondaryYOffsets,
     width: defaultwidth,
-    height: vigorToHeightMapping,
+    height: secondaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: vigorBorderColor,
+    fill_color: secondaryBorderColor,
     stroke_width: defaultStrokeWidth
   
-  #need to move the vigor icon down x * 20 pixels below the perception icon (assuming it exists)
-  #first, figure out what the perception offsets for each card are  
-  offsetsFromPerceptionIcons = data['Perception Requirements'].map {|value| value * iconDefaultDistanceApart}
-  #vigor icon locations are the previous icons location + the offsets calculated above
-  vigorIconYOffsets = perceptionIconYOffsets.zip(offsetsFromPerceptionIcons).map {|subArray| subArray.sum}
-  vigorBarImageLayout = vigorWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: vigorRequirementsImage, layout: vigorBarImageLayout, y: vigorIconYOffsets
+  #need to move the secondary icon down x * 20 pixels below the primary icon (assuming it exists)
+  #first, figure out what the primary offsets for each card are  
+  offsetsFromPrimaryIcons = data['Primary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  #secondary icon locations are the previous icons location + the offsets calculated above
+  secondaryIconYOffsets = primaryIconYOffsets.zip(offsetsFromPrimaryIcons).map {|subArray| subArray.sum}
+  secondaryBarImageLayout = secondaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: secondaryRequirementsImage, layout: secondaryBarImageLayout, y: secondaryIconYOffsets
 
-  ## Creating Finesse bars
+  ## Creating Tertiary bars
   
-  #same as above, but for finesse
-  finesseToHeightMapping = data['Finesse Requirements'].map {|value| value * defaultHeight}
+  #same as above, but for tertiary
+  tertiaryToHeightMapping = data['Tertiary Requirements'].map {|value| value * defaultHeight}
 
-  vigorHeightsPositive = vigorToHeightMapping.map {|element| element*=-1;element}
-  totalVigorOffsetArrays = vigorYOffsets.zip(vigorHeightsPositive)
-  finesseYOffsets = totalVigorOffsetArrays.map {|subArray| subArray.sum}
+  secondaryHeightsPositive = secondaryToHeightMapping.map {|element| element*=-1;element}
+  totalSecondaryOffsetArrays = secondaryYOffsets.zip(secondaryHeightsPositive)
+  tertiaryYOffsets = totalSecondaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: finesseYOffsets,
+    y: tertiaryYOffsets,
     width: defaultwidth,
-    height: finesseToHeightMapping,
+    height: tertiaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: finesseBorderColor,
+    fill_color: tertiaryBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromVigorIcons = data['Vigor Requirements'].map {|value| value * iconDefaultDistanceApart}
-  finesseIconYOffsets = vigorIconYOffsets.zip(offsetsFromVigorIcons).map {|subArray| subArray.sum}
-  finesseBarImageLayout = finesseWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: finesseRequirementsImage, layout: finesseBarImageLayout, y: finesseIconYOffsets
+  offsetsFromSecondaryIcons = data['Secondary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  tertiaryIconYOffsets = secondaryIconYOffsets.zip(offsetsFromSecondaryIcons).map {|subArray| subArray.sum}
+  tertiaryBarImageLayout = tertiaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: tertiaryRequirementsImage, layout: tertiaryBarImageLayout, y: tertiaryIconYOffsets
   
   ## Creating Knowledge bars
   
   #same as the above, but for knowledge
   knowledgeToHeightMapping = data['Knowledge Requirements'].map {|value| value * defaultHeight}
 
-  finesseHeightsPositive = finesseToHeightMapping.map {|element| element*=-1;element}
-  totalFinesseOffsetArrays = finesseYOffsets.zip(finesseHeightsPositive)
-  knowledgeYOffsets = totalFinesseOffsetArrays.map {|subArray| subArray.sum}
+  tertiaryHeightsPositive = tertiaryToHeightMapping.map {|element| element*=-1;element}
+  totalTertiaryOffsetArrays = tertiaryYOffsets.zip(tertiaryHeightsPositive)
+  knowledgeYOffsets = totalTertiaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
     y: knowledgeYOffsets,
     width: defaultwidth,
@@ -244,8 +244,8 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     fill_color: knowledgeBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromFinesseIcons = data['Finesse Requirements'].map {|value| value * iconDefaultDistanceApart}
-  knowledgeIconYOffsets = finesseIconYOffsets.zip(offsetsFromFinesseIcons).map {|subArray| subArray.sum}
+  offsetsFromTertiaryIcons = data['Tertiary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  knowledgeIconYOffsets = tertiaryIconYOffsets.zip(offsetsFromTertiaryIcons).map {|subArray| subArray.sum}
   knowledgeBarImageLayout = knowledgeWriteLocations.map {|val| 'barImage' + val.to_s}
   svg file: knowledgeRequirementsImage, layout: knowledgeBarImageLayout, y: knowledgeIconYOffsets
   
@@ -461,31 +461,31 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
 
   
   #create arrays of the same size of the value (if 0 it'll be removed in the following step
-  perceptionRequirementsText = data['Perception Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  primaryRequirementsText = data['Primary Requirements'].map {|val| val > 0 ? val.to_s : ""}
   #figure out if this text should be placed or not by appending the number (0 = doesn't appear)
-  perceptionRequirementsTextLayout = perceptionWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  primaryRequirementsTextLayout = primaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
   #print the text
-  text str: perceptionRequirementsText, layout: perceptionRequirementsTextLayout
+  text str: primaryRequirementsText, layout: primaryRequirementsTextLayout
   
-  #icon to use for perception
+  #icon to use for primary
   #figure out if this image should be placed or not by appending the number (0 = doesn't appear)
-  perceptionRequirementsImageLayout = perceptionWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  primaryRequirementsImageLayout = primaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   #write the icon
-  svg file: perceptionRequirementsImage, layout: perceptionRequirementsImageLayout
+  svg file: primaryRequirementsImage, layout: primaryRequirementsImageLayout
       
   #repeat for other stats
-  vigorRequirementsText = data['Vigor Requirements'].map {|val| val > 0 ? val.to_s : ""}  
-  vigorRequirementsTextLayout = vigorWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: vigorRequirementsText, layout: vigorRequirementsTextLayout
-  vigorRequirementsImageLayout = vigorWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: vigorRequirementsImage, layout: vigorRequirementsImageLayout
+  secondaryRequirementsText = data['Secondary Requirements'].map {|val| val > 0 ? val.to_s : ""}  
+  secondaryRequirementsTextLayout = secondaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: secondaryRequirementsText, layout: secondaryRequirementsTextLayout
+  secondaryRequirementsImageLayout = secondaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: secondaryRequirementsImage, layout: secondaryRequirementsImageLayout
   
   
-  finesseRequirementsText = data['Finesse Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  finesseRequirementsTextLayout = finesseWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: finesseRequirementsText, layout: finesseRequirementsTextLayout
-  finesseRequirementsImageLayout = finesseWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: finesseRequirementsImage, layout: finesseRequirementsImageLayout
+  tertiaryRequirementsText = data['Tertiary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  tertiaryRequirementsTextLayout = tertiaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: tertiaryRequirementsText, layout: tertiaryRequirementsTextLayout
+  tertiaryRequirementsImageLayout = tertiaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: tertiaryRequirementsImage, layout: tertiaryRequirementsImageLayout
   
   knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s : ""}
   knowledgeRequirementsTextLayout = knowledgeWriteLocations.map {|val| 'requirementsBody' + val.to_s}
