@@ -42,11 +42,11 @@ end
   nonZeroPrimary = data['Primary Requirements'].map {|val| val > 0 ? 1 : 0}
   nonZeroSecondary = data['Secondary Requirements'].map {|val| val > 0 ? 1 : 0}
   nonZeroTertiary = data['Tertiary Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroKnowledge = data['Knowledge Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroStrength = data['Strength Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroSpirituality = data['Spirituality Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroCharisma = data['Charisma Requirements'].map {|val| val > 0 ? 1 : 0}
-  nonZeroCraftmanship = data['Craftmanship Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroQuarternary = data['Quarternary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroQuinary = data['Quinary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroSenary = data['Senary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroSeptenary = data['Septenary Requirements'].map {|val| val > 0 ? 1 : 0}
+  nonZeroOctonary = data['Octonary Requirements'].map {|val| val > 0 ? 1 : 0}
   #create a zero'd out list of the right size for keeping a running total
   #example: [0,0,0,0,0...]
   recordOfWhereStatsGo = data['Primary Requirements'].map {|val| 0}
@@ -62,26 +62,26 @@ end
   secondaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroSecondary).map{|x,y| x*y}
   recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroTertiary).map{|x,y| x+y}
   tertiaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroTertiary).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x+y}
-  knowledgeWriteLocations = recordOfWhereStatsGo.zip(nonZeroKnowledge).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x+y}
-  strengthWriteLocations = recordOfWhereStatsGo.zip(nonZeroStrength).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x+y}
-  spiritualityWriteLocations = recordOfWhereStatsGo.zip(nonZeroSpirituality).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x+y}
-  charismaWriteLocations = recordOfWhereStatsGo.zip(nonZeroCharisma).map{|x,y| x*y}
-  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x+y}
-  craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroQuarternary).map{|x,y| x+y}
+  quarternaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroQuarternary).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroQuinary).map{|x,y| x+y}
+  quinaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroQuinary).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSenary).map{|x,y| x+y}
+  senaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroSenary).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroSeptenary).map{|x,y| x+y}
+  septenaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroSeptenary).map{|x,y| x*y}
+  recordOfWhereStatsGo = recordOfWhereStatsGo.zip(nonZeroOctonary).map{|x,y| x+y}
+  octonaryWriteLocations = recordOfWhereStatsGo.zip(nonZeroOctonary).map{|x,y| x*y}
   
   #icons for the requirements
   primaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\primary-skill-needed-icon.svg"
   secondaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\secondary-skill-needed-icon.svg"
   tertiaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\tertiary-skill-needed-icon.svg"
-  knowledgeRequirementsImage = "..\\Svg Files\\Stat Requirements\\quaternary-skill-needed-icon.svg"
-  strengthRequirementsImage = "..\\Svg Files\\Stat Requirements\\quinary-skill-needed-icon.svg"
-  spiritualityRequirementsImage = "..\\Svg Files\\Stat Requirements\\senary-skill-needed-icon.svg"
-  charismaRequirementsImage = "..\\Svg Files\\Stat Requirements\\septenary-skill-needed-icon.svg"
-  craftmanshipRequirementsImage = "..\\Svg Files\\Stat Requirements\\octonary-skill-needed-icon.svg"
+  quarternaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\quaternary-skill-needed-icon.svg"
+  quinaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\quinary-skill-needed-icon.svg"
+  senaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\senary-skill-needed-icon.svg"
+  septenaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\septenary-skill-needed-icon.svg"
+  octonaryRequirementsImage = "..\\Svg Files\\Stat Requirements\\octonary-skill-needed-icon.svg"
   
   #icons for the bubbles
   crosshairImage = "..\\Svg Files\\Character Bubbles\\crosshair.svg"
@@ -142,11 +142,11 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   primaryBorderColor = '#00ffff'
   secondaryBorderColor = '#008000'
   tertiaryBorderColor = '#ffc0cb'
-  knowledgeBorderColor = '#0000ff'
-  strengthBorderColor = '#ff0000'
-  spiritualityBorderColor = '#800080'
-  charismaBorderColor = '#ffd700'
-  craftmanshipBorderColor = '#ffffff'
+  quarternaryBorderColor = '#0000ff'
+  quinaryBorderColor = '#ff0000'
+  senaryBorderColor = '#800080'
+  septenaryBorderColor = '#ffd700'
+  octonaryBorderColor = '#ffffff'
 
 
   ## Creating Primary bars
@@ -228,110 +228,110 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   tertiaryBarImageLayout = tertiaryWriteLocations.map {|val| 'barImage' + val.to_s}
   svg file: tertiaryRequirementsImage, layout: tertiaryBarImageLayout, y: tertiaryIconYOffsets
   
-  ## Creating Knowledge bars
+  ## Creating Quarternary bars
   
-  #same as the above, but for knowledge
-  knowledgeToHeightMapping = data['Knowledge Requirements'].map {|value| value * defaultHeight}
+  #same as the above, but for quarternary
+  quarternaryToHeightMapping = data['Quarternary Requirements'].map {|value| value * defaultHeight}
 
   tertiaryHeightsPositive = tertiaryToHeightMapping.map {|element| element*=-1;element}
   totalTertiaryOffsetArrays = tertiaryYOffsets.zip(tertiaryHeightsPositive)
-  knowledgeYOffsets = totalTertiaryOffsetArrays.map {|subArray| subArray.sum}
+  quarternaryYOffsets = totalTertiaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: knowledgeYOffsets,
+    y: quarternaryYOffsets,
     width: defaultwidth,
-    height: knowledgeToHeightMapping,
+    height: quarternaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: knowledgeBorderColor,
+    fill_color: quarternaryBorderColor,
     stroke_width: defaultStrokeWidth
 
   offsetsFromTertiaryIcons = data['Tertiary Requirements'].map {|value| value * iconDefaultDistanceApart}
-  knowledgeIconYOffsets = tertiaryIconYOffsets.zip(offsetsFromTertiaryIcons).map {|subArray| subArray.sum}
-  knowledgeBarImageLayout = knowledgeWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: knowledgeRequirementsImage, layout: knowledgeBarImageLayout, y: knowledgeIconYOffsets
+  quarternaryIconYOffsets = tertiaryIconYOffsets.zip(offsetsFromTertiaryIcons).map {|subArray| subArray.sum}
+  quarternaryBarImageLayout = quarternaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: quarternaryRequirementsImage, layout: quarternaryBarImageLayout, y: quarternaryIconYOffsets
   
-  ## Creating Strength bars
+  ## Creating Quinary bars
   
-  #same as the above, but for strength
-  strengthToHeightMapping = data['Strength Requirements'].map {|value| value * defaultHeight}
+  #same as the above, but for quinary
+  quinaryToHeightMapping = data['Quinary Requirements'].map {|value| value * defaultHeight}
 
-  knowledgeHeightsPositive = knowledgeToHeightMapping.map {|element| element*=-1;element}
-  totalKnowledgeOffsetArrays = knowledgeYOffsets.zip(knowledgeHeightsPositive)
-  strengthYOffsets = totalKnowledgeOffsetArrays.map {|subArray| subArray.sum}
+  quarternaryHeightsPositive = quarternaryToHeightMapping.map {|element| element*=-1;element}
+  totalQuarternaryOffsetArrays = quarternaryYOffsets.zip(quarternaryHeightsPositive)
+  quinaryYOffsets = totalQuarternaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: strengthYOffsets,
+    y: quinaryYOffsets,
     width: defaultwidth,
-    height: strengthToHeightMapping,
+    height: quinaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: strengthBorderColor,
+    fill_color: quinaryBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromKnowledgeIcons = data['Knowledge Requirements'].map {|value| value * iconDefaultDistanceApart}
-  strengthIconYOffsets = knowledgeIconYOffsets.zip(offsetsFromKnowledgeIcons).map {|subArray| subArray.sum}
-  strengthBarImageLayout = strengthWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: strengthRequirementsImage, layout: strengthBarImageLayout, y: strengthIconYOffsets
+  offsetsFromQuarternaryIcons = data['Quarternary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  quinaryIconYOffsets = quarternaryIconYOffsets.zip(offsetsFromQuarternaryIcons).map {|subArray| subArray.sum}
+  quinaryBarImageLayout = quinaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: quinaryRequirementsImage, layout: quinaryBarImageLayout, y: quinaryIconYOffsets
   
-  ## Creating Spirituality bars
+  ## Creating Senary bars
   
-  #same as the above, but for spirituality
-  spiritualityToHeightMapping = data['Spirituality Requirements'].map {|value| value * defaultHeight}
+  #same as the above, but for senary
+  senaryToHeightMapping = data['Senary Requirements'].map {|value| value * defaultHeight}
 
-  strengthHeightsPositive = strengthToHeightMapping.map {|element| element*=-1;element}
-  totalStrengthOffsetArrays = strengthYOffsets.zip(strengthHeightsPositive)
-  spiritualityYOffsets = totalStrengthOffsetArrays.map {|subArray| subArray.sum}
+  quinaryHeightsPositive = quinaryToHeightMapping.map {|element| element*=-1;element}
+  totalQuinaryOffsetArrays = quinaryYOffsets.zip(quinaryHeightsPositive)
+  senaryYOffsets = totalQuinaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: spiritualityYOffsets,
+    y: senaryYOffsets,
     width: defaultwidth,
-    height: spiritualityToHeightMapping,
+    height: senaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: spiritualityBorderColor,
+    fill_color: senaryBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromStrengthIcons = data['Strength Requirements'].map {|value| value * iconDefaultDistanceApart}
-  spiritualityIconYOffsets = strengthIconYOffsets.zip(offsetsFromStrengthIcons).map {|subArray| subArray.sum}
-  spiritualityBarImageLayout = spiritualityWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: spiritualityRequirementsImage, layout: spiritualityBarImageLayout, y: spiritualityIconYOffsets
+  offsetsFromQuinaryIcons = data['Quinary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  senaryIconYOffsets = quinaryIconYOffsets.zip(offsetsFromQuinaryIcons).map {|subArray| subArray.sum}
+  senaryBarImageLayout = senaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: senaryRequirementsImage, layout: senaryBarImageLayout, y: senaryIconYOffsets
   
-  ## Creating Charisma bars
+  ## Creating Septenary bars
   
-  #same as the above, but for charisma
-  charismaToHeightMapping = data['Charisma Requirements'].map {|value| value * defaultHeight}
+  #same as the above, but for septenary
+  septenaryToHeightMapping = data['Septenary Requirements'].map {|value| value * defaultHeight}
 
-  spiritualityHeightsPositive = spiritualityToHeightMapping.map {|element| element*=-1;element}
-  totalSpiritualityOffsetArrays = spiritualityYOffsets.zip(spiritualityHeightsPositive)
-  charismaYOffsets = totalSpiritualityOffsetArrays.map {|subArray| subArray.sum}
+  senaryHeightsPositive = senaryToHeightMapping.map {|element| element*=-1;element}
+  totalSenaryOffsetArrays = senaryYOffsets.zip(senaryHeightsPositive)
+  septenaryYOffsets = totalSenaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: charismaYOffsets,
+    y: septenaryYOffsets,
     width: defaultwidth,
-    height: charismaToHeightMapping,
+    height: septenaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: charismaBorderColor,
+    fill_color: septenaryBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromSpiritualityIcons = data['Spirituality Requirements'].map {|value| value * iconDefaultDistanceApart}
-  charismaIconYOffsets = spiritualityIconYOffsets.zip(offsetsFromSpiritualityIcons).map {|subArray| subArray.sum}
-  charismaBarImageLayout = charismaWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: charismaRequirementsImage, layout: charismaBarImageLayout, y: charismaIconYOffsets
+  offsetsFromSenaryIcons = data['Senary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  septenaryIconYOffsets = senaryIconYOffsets.zip(offsetsFromSenaryIcons).map {|subArray| subArray.sum}
+  septenaryBarImageLayout = septenaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: septenaryRequirementsImage, layout: septenaryBarImageLayout, y: septenaryIconYOffsets
   
-  ## Creating Craftmanship bars
+  ## Creating Octonary bars
   
-  #same as the above, but for craftmanship
-  craftmanshipToHeightMapping = data['Craftmanship Requirements'].map {|value| value * defaultHeight}
+  #same as the above, but for octonary
+  octonaryToHeightMapping = data['Octonary Requirements'].map {|value| value * defaultHeight}
 
-  charismaHeightsPositive = charismaToHeightMapping.map {|element| element*=-1;element}
-  totalCharismaOffsetArrays = charismaYOffsets.zip(charismaHeightsPositive)
-  craftmanshipYOffsets = totalCharismaOffsetArrays.map {|subArray| subArray.sum}
+  septenaryHeightsPositive = septenaryToHeightMapping.map {|element| element*=-1;element}
+  totalSeptenaryOffsetArrays = septenaryYOffsets.zip(septenaryHeightsPositive)
+  octonaryYOffsets = totalSeptenaryOffsetArrays.map {|subArray| subArray.sum}
   rect x: defaultXOffset,
-    y: craftmanshipYOffsets,
+    y: octonaryYOffsets,
     width: defaultwidth,
-    height: craftmanshipToHeightMapping,
+    height: octonaryToHeightMapping,
     angle: defaultAngle,
-    fill_color: craftmanshipBorderColor,
+    fill_color: octonaryBorderColor,
     stroke_width: defaultStrokeWidth
 
-  offsetsFromCharismaIcons = data['Charisma Requirements'].map {|value| value * iconDefaultDistanceApart}
-  craftmanshipIconYOffsets = charismaIconYOffsets.zip(offsetsFromCharismaIcons).map {|subArray| subArray.sum}
-  craftmanshipBarImageLayout = craftmanshipWriteLocations.map {|val| 'barImage' + val.to_s}
-  svg file: craftmanshipRequirementsImage, layout: craftmanshipBarImageLayout, y: craftmanshipIconYOffsets
+  offsetsFromSeptenaryIcons = data['Septenary Requirements'].map {|value| value * iconDefaultDistanceApart}
+  octonaryIconYOffsets = septenaryIconYOffsets.zip(offsetsFromSeptenaryIcons).map {|subArray| subArray.sum}
+  octonaryBarImageLayout = octonaryWriteLocations.map {|val| 'barImage' + val.to_s}
+  svg file: octonaryRequirementsImage, layout: octonaryBarImageLayout, y: octonaryIconYOffsets
   
   ## debug
   
@@ -487,35 +487,35 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   tertiaryRequirementsImageLayout = tertiaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
   svg file: tertiaryRequirementsImage, layout: tertiaryRequirementsImageLayout
   
-  knowledgeRequirementsText = data['Knowledge Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  knowledgeRequirementsTextLayout = knowledgeWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: knowledgeRequirementsText, layout: knowledgeRequirementsTextLayout
-  knowledgeRequirementsImageLayout = knowledgeWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: knowledgeRequirementsImage, layout: knowledgeRequirementsImageLayout
+  quarternaryRequirementsText = data['Quarternary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  quarternaryRequirementsTextLayout = quarternaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: quarternaryRequirementsText, layout: quarternaryRequirementsTextLayout
+  quarternaryRequirementsImageLayout = quarternaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: quarternaryRequirementsImage, layout: quarternaryRequirementsImageLayout
   
-  strengthRequirementsText = data['Strength Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  strengthRequirementsTextLayout = strengthWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: strengthRequirementsText, layout: strengthRequirementsTextLayout
-  strengthRequirementsImageLayout = strengthWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: strengthRequirementsImage, layout: strengthRequirementsImageLayout
+  quinaryRequirementsText = data['Quinary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  quinaryRequirementsTextLayout = quinaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: quinaryRequirementsText, layout: quinaryRequirementsTextLayout
+  quinaryRequirementsImageLayout = quinaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: quinaryRequirementsImage, layout: quinaryRequirementsImageLayout
   
-  spiritualityRequirementsText = data['Spirituality Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  spiritualityRequirementsTextLayout = spiritualityWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: spiritualityRequirementsText, layout: spiritualityRequirementsTextLayout
-  spiritualityRequirementsImageLayout = spiritualityWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: spiritualityRequirementsImage, layout: spiritualityRequirementsImageLayout
+  senaryRequirementsText = data['Senary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  senaryRequirementsTextLayout = senaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: senaryRequirementsText, layout: senaryRequirementsTextLayout
+  senaryRequirementsImageLayout = senaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: senaryRequirementsImage, layout: senaryRequirementsImageLayout
   
-  charismaRequirementsText = data['Charisma Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  charismaRequirementsTextLayout = charismaWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: charismaRequirementsText, layout: charismaRequirementsTextLayout
-  charismaRequirementsImageLayout = charismaWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: charismaRequirementsImage, layout: charismaRequirementsImageLayout
+  septenaryRequirementsText = data['Septenary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  septenaryRequirementsTextLayout = septenaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: septenaryRequirementsText, layout: septenaryRequirementsTextLayout
+  septenaryRequirementsImageLayout = septenaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: septenaryRequirementsImage, layout: septenaryRequirementsImageLayout
   
-  craftmanshipRequirementsText = data['Craftmanship Requirements'].map {|val| val > 0 ? val.to_s : ""}
-  craftmanshipRequirementsTextLayout = craftmanshipWriteLocations.map {|val| 'requirementsBody' + val.to_s}
-  text str: craftmanshipRequirementsText, layout: craftmanshipRequirementsTextLayout
-  craftmanshipRequirementsImageLayout = craftmanshipWriteLocations.map {|val| 'requirementsImage' + val.to_s}
-  svg file: craftmanshipRequirementsImage, layout: craftmanshipRequirementsImageLayout
+  octonaryRequirementsText = data['Octonary Requirements'].map {|val| val > 0 ? val.to_s : ""}
+  octonaryRequirementsTextLayout = octonaryWriteLocations.map {|val| 'requirementsBody' + val.to_s}
+  text str: octonaryRequirementsText, layout: octonaryRequirementsTextLayout
+  octonaryRequirementsImageLayout = octonaryWriteLocations.map {|val| 'requirementsImage' + val.to_s}
+  svg file: octonaryRequirementsImage, layout: octonaryRequirementsImageLayout
   
 
   #to keep track of cards in a tier, we create a circle and put in a number of its index from the .csv
