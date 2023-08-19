@@ -618,8 +618,8 @@ requirementsIconsWidthHeight:
   height: 40
   
 barIconsWidthHeight:
-  width: 25
-  height: 30
+  width: 30
+  height: 40
 
 ## back of card
 

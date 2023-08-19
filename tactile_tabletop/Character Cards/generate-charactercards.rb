@@ -74,14 +74,20 @@ end
   craftmanshipWriteLocations = recordOfWhereStatsGo.zip(nonZeroCraftmanship).map{|x,y| x*y}
   
   #icons for the requirements
-  perceptionRequirementsImage = "..\\Assets\\primary-skill-needed-icon.svg"
-  vigorRequirementsImage = "..\\Assets\\secondary-skill-needed-icon.svg"
-  finesseRequirementsImage = "..\\Assets\\tertiary-skill-needed-icon.svg"
-  knowledgeRequirementsImage = "..\\Assets\\quaternary-skill-needed-icon.svg"
-  strengthRequirementsImage = "..\\Assets\\quinary-skill-needed-icon.svg"
-  spiritualityRequirementsImage = "..\\Assets\\senary-skill-needed-icon.svg"
-  charismaRequirementsImage = "..\\Assets\\septenary-skill-needed-icon.svg"
-  craftmanshipRequirementsImage = "..\\Assets\\octonary-skill-needed-icon.svg"
+  perceptionRequirementsImage = "..\\Svg Files\\Stat Requirements\\primary-skill-needed-icon.svg"
+  vigorRequirementsImage = "..\\Svg Files\\Stat Requirements\\secondary-skill-needed-icon.svg"
+  finesseRequirementsImage = "..\\Svg Files\\Stat Requirements\\tertiary-skill-needed-icon.svg"
+  knowledgeRequirementsImage = "..\\Svg Files\\Stat Requirements\\quaternary-skill-needed-icon.svg"
+  strengthRequirementsImage = "..\\Svg Files\\Stat Requirements\\quinary-skill-needed-icon.svg"
+  spiritualityRequirementsImage = "..\\Svg Files\\Stat Requirements\\senary-skill-needed-icon.svg"
+  charismaRequirementsImage = "..\\Svg Files\\Stat Requirements\\septenary-skill-needed-icon.svg"
+  craftmanshipRequirementsImage = "..\\Svg Files\\Stat Requirements\\octonary-skill-needed-icon.svg"
+  
+  #icons for the bubbles
+  crosshairImage = "..\\Svg Files\\Character Bubbles\\crosshair.svg"
+  binocularsImage = "..\\Svg Files\\Character Bubbles\\binoculars.svg"
+  stopwatchImage = "..\\Svg Files\\Character Bubbles\\stopwatch.svg"
+  arrowDunkImage = "..\\Svg Files\\Character Bubbles\\arrow-dunk.svg"
 
 
 
@@ -356,23 +362,23 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   #fill in the bubble with text (has to be concise). Target can be Ally, ENemy, Self, Plant/Animal, area, Target (generic and flexible)
   text str: data['Top Ability Target'], layout: 'topTarget'
   #put in a background image, a little faded, of a crosshair
-  svg data: GameIcons.get('crosshair').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'topTargetIcon'
+  svg file: crosshairImage, layout: 'topTargetIcon'
 
   #similar to above, but for the Range (close, controlled by weapon, controlled by influence)
   rect layout: 'topRangeBubble'
   text str: data['Top Weapon Or Influence'], layout: 'topRange'
   text str: data['Top Ability Target'], layout: 'topTarget'
-  svg data: GameIcons.get('binoculars').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'topRangeIcon'
+  svg file: binocularsImage, layout: 'topRangeIcon'
 
   #similar to above, but for duration (Instant, # rnds, Day,)
   rect layout: 'topDurationBubble'
   text str: data['Top Ability Duration'], layout: 'topDuration'
-  svg data: GameIcons.get('stopwatch').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'topDurationIcon'
+  svg file: stopwatchImage, layout: 'topDurationIcon'
 
   #similar to above, but for what happens to the card as a result of using this action (hand, discard, exhaust)
   rect layout: 'topResultBubble'
   text str: data['Top Ability Following Card Action'], layout: 'topResult'
-  svg data: GameIcons.get('arrow-dunk').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'topResultIcon'
+  svg file: arrowDunkImage, layout: 'topResultIcon'
 
   #now that we've handled bubbles, we need to handle the text of the ability itself
   #these rectangles are good for debugging around resizing, but otherwise shouldn't be made visible
@@ -396,19 +402,19 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
   #bubbles
   rect layout: 'bottomTargetBubble'
   text str: data['Bottom Ability Target'], layout: 'bottomTarget'
-  svg data: GameIcons.get('crosshair').recolor(fg: '777', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'bottomTargetIcon'
+  svg file: crosshairImage, layout: 'bottomTargetIcon'
 
   rect layout: 'bottomRangeBubble'
   text str: data['Bottom Weapon Or Influence'], layout: 'bottomRange'
-  svg data: GameIcons.get('binoculars').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'bottomRangeIcon'
+  svg file: binocularsImage, layout: 'bottomRangeIcon'
 
   rect layout: 'bottomDurationBubble'
   text str: data['Bottom Ability Duration'], layout: 'bottomDuration'
-  svg data: GameIcons.get('stopwatch').recolor(fg: '777', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'bottomDurationIcon'
+  svg file: stopwatchImage, layout: 'bottomDurationIcon'
 
   rect layout: 'bottomResultBubble'
   text str: data['Bottom Ability Following Card Action'], layout: 'bottomResult'
-  svg data: GameIcons.get('arrow-dunk').recolor(fg: 'aaa', bg: '000', fg_opacity: 0.6, bg_opacity: 0).string, layout: 'bottomResultIcon'
+  svg file: arrowDunkImage, layout: 'bottomResultIcon'
 
   #ability specifics
   #rect layout: 'bottomTitle'
@@ -562,9 +568,10 @@ Squib::Deck.new(dpi: 300, width: 822, height: 1122, cards: data['Top Ability Nam
     }
   png file: levelImage
     
-  svg data: GameIcons.get('rolling-dices').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'diceBack'
-  svg data: GameIcons.get('card-random').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'cardBack'
-  svg data: GameIcons.get('two-coins').recolor(fg: 'fff', bg: '000', fg_opacity: 1, bg_opacity: 0).string, layout: 'tokensBack'
+  svg file: "..\\Svg Files\\Backs\\rolling-dices.svg", layout: 'diceBack'
+  svg file: "..\\Svg Files\\Backs\\card-random.svg", layout: 'cardBack'
+  svg file: "..\\Svg Files\\Backs\\two-coins.svg", layout: 'tokensBack'
+  
   text str: "Tactile Tabletop", layout: 'companyLogo'
   #rect layout: 'companyLogo'
 
