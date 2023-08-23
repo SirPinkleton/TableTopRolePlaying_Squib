@@ -475,22 +475,14 @@ verticalLine:
 
 
 #text "Tier"
-tierTitle:
+typeOfCard:
   extends: 
    - passivesTitle
-  x: += 550
-  width: 70
+  x: += 540
+  width: 100
   height: 35
   align: left
   font: 'Garamond 7.5'
-
-#a number
-tierBody:
-  extends: tierTitle
-  x: += 60
-  width: 30
-  height: 35
-  align: center
 
 
 #doesn't ever change, the word "Requirements
@@ -518,7 +510,7 @@ requirementsBody0:
 requirementsBody1:
   extends: requirementsTitle
   x: += 200
-  width: 80
+  width: 280
 
 requirementsBody2:
   extends: requirementsBody1
